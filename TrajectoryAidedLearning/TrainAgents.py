@@ -5,9 +5,8 @@ import torch
 
 import numpy as np
 import time
-from TrajectoryAidedLearning.SelectionFunctions import *
+from TrajectoryAidedLearning.Utils.RewardSignals import *
 from TrajectoryAidedLearning.Utils.StdTrack import StdTrack
-from TrajectoryAidedLearning.Utils.RacingTrack import RacingTrack
 
 from TrajectoryAidedLearning.Utils.HistoryStructs import VehicleStateHistory
 from TrajectoryAidedLearning.TestSimulation import TestSimulation
@@ -16,6 +15,20 @@ from TrajectoryAidedLearning.TestSimulation import TestSimulation
 SHOW_TRAIN = False
 # SHOW_TRAIN = True
 VERBOSE = True
+
+
+
+def select_reward_function(run, conf, std_track):
+    reward = run.reward
+    if reward == "Progress":
+        reward_function = ProgressReward(std_track)
+    elif reward == "Cth": 
+        reward_function = CrossTrackHeadReward(std_track, conf)
+    elif reward == "TAL":
+        reward_function = TALearningReward(conf, run)
+    else: raise Exception("Unknown reward function: " + reward)
+        
+    return reward_function
 
 
 class TrainSimulation(TestSimulation):
@@ -41,8 +54,7 @@ class TrainSimulation(TestSimulation):
 
             #train
             self.std_track = StdTrack(run.map_name)
-            self.race_track = RacingTrack(run.map_name)
-            self.reward = select_reward_function(run, self.conf, self.std_track, self.race_track)
+            self.reward = select_reward_function(run, self.conf, self.std_track)
 
             self.planner = AgentTrainer(run, self.conf)
 
@@ -124,11 +136,12 @@ class TrainSimulation(TestSimulation):
 
 
 def main():
-    # run_file = "Eval_RewardsSlow"
-    run_file = "Eval_MaxSpeed"
-    # run_file = "Eval_RewardsFast"
-    # run_file = "Eval_StdRewardFast"
-    
+    # run_file = "Cth_maps"
+    # run_file = "Cth_speeds"
+    # run_file = "TAL_maps"
+    run_file = "TAL_speeds"
+    # run_file = "CthVsProgress"
+
     
     sim = TrainSimulation(run_file)
     sim.run_training_evaluation()

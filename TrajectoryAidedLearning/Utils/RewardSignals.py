@@ -70,9 +70,9 @@ class CrossTrackHeadReward:
 
 class TALearningReward:
     def __init__(self, conf, run):
-        run.pp_speed = "raceline"
+        run.pp_speed_mode = "raceline"
         run.raceline = True
-        self.pp = PurePursuit(conf, run, False, True) 
+        self.pp = PurePursuit(conf, run, False) 
 
         self.beta_c = 0.4
         self.beta_steer_weight = 0.4

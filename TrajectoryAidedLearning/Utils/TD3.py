@@ -136,9 +136,6 @@ class TD3(object):
 
         self.replay_buffer = SmartBufferTD3(state_dim=state_dim, act_dim=action_dim)
 
-
-        # np.random.seed(0)
-
     def create_agent(self, h_size):
         state_dim = self.state_dim
         action_dim = self.act_dim

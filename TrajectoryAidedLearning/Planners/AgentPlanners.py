@@ -51,7 +51,6 @@ class FastArchitecture:
 
     def transform_action(self, nn_action):
         steering_angle = nn_action[0] * self.max_steer
-        #! this is a place to look if things don't work. This was max v, meaning that at lower speeds it would only limit it by clipping. That wasn't good.
         speed = (nn_action[1] + 1) * (self.max_speed  / 2 - 0.5) + 1
         speed = min(speed, self.max_speed) # cap the speed
 
