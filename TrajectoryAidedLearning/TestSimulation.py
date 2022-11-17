@@ -49,7 +49,7 @@ class TestSimulation():
             print("_________________________________________________________")
             seed = run.random_seed + 10*run.n
             np.random.seed(seed) # repetition seed
-            torch.use_deterministic_algorithms(True)
+            torch.set_deterministic(True)
             torch.manual_seed(seed)
 
             if run.noise_std > 0:
@@ -59,18 +59,13 @@ class TestSimulation():
             self.env = F110Env(map=run.map_name)
             self.map_name = run.map_name
 
-            if run.planner == "PP": 
+            if run.architecture == "PP": 
                 planner = PurePursuit(self.conf, run)
-            elif run.planner == "FGM": planner = FollowTheGap(self.conf, run)
-            elif run.planner == "Rando": 
-                planner = RandomPlanner(run, self.conf)
-            elif run.planner == "Agent": 
+            elif run.architecture == "fast": 
                 planner = AgentTester(run, self.conf)
             else: raise AssertionError(f"Planner {run.planner} not found")
 
             if run.test_mode == "Std": self.planner = planner
-            elif run.test_mode == "Super": 
-                self.planner = Supervisor(planner, True)
             else: raise AssertionError(f"Test mode {run.test_mode} not found")
 
             self.vehicle_state_history = VehicleStateHistory(run, "Testing/")
@@ -219,7 +214,8 @@ class TestSimulation():
 
 
 def main():
-    run_file = "Eval_RewardsSlow"
+    run_file = "PP_speeds"
+    # run_file = "Eval_RewardsSlow"
     
     
     sim = TestSimulation(run_file)

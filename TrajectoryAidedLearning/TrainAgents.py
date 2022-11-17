@@ -137,9 +137,9 @@ class TrainSimulation(TestSimulation):
 
 def main():
     # run_file = "Cth_maps"
-    # run_file = "Cth_speeds"
+    run_file = "Cth_speeds"
     # run_file = "TAL_maps"
-    run_file = "TAL_speeds"
+    # run_file = "TAL_speeds"
     # run_file = "CthVsProgress"
 
     
