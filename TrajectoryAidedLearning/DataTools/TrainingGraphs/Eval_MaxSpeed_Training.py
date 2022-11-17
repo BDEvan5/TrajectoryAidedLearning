@@ -21,16 +21,17 @@ def Eval_MaxSpeed_TrainingProgress():
         for j in range(n_repeats):
             path = p + f"fast_Std_Std_Cth_f1_esp_{v}_1_{j}/"
             rewards, lengths, progresses, _ = load_csv_data(path)
-            steps = np.cumsum(lengths[:-1]) / 100
+            steps = np.cumsum(lengths[:-1]) / 1000
             avg_progress = true_moving_average(progresses[:-1], 20)* 100
             steps_list[i].append(steps)
             progresses_list[i].append(avg_progress)
 
-    plt.figure(2, figsize=(6.5, 2.5))
+    plt.figure(2, figsize=(4.5, 2.1))
 
-    labels = ['4 m/s', '5 m/s', '6 m/s', '7 m/s', '8 m/s']
+    labels = ["4", "5", "6", "7", "8"]
+    # labels = ['4 m/s', '5 m/s', '6 m/s', '7 m/s', '8 m/s']
 
-    xs = np.linspace(0, 1000, 300)
+    xs = np.linspace(0, 100, 300)
     for i in range(len(steps_list)):
         min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
@@ -39,10 +40,11 @@ def Eval_MaxSpeed_TrainingProgress():
 
     plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))
 
-    plt.xlabel("Training Steps (x100)")
+    plt.xlabel("Training Steps (x1000)")
     plt.ylabel("Track Progress %")
     plt.ylim(0, 100)
-    plt.legend(loc='center right', bbox_to_anchor=(1.2, 0.5), ncol=1)
+    plt.legend(loc='center', bbox_to_anchor=(1.06, 0.5), ncol=1)
+    # plt.legend(loc='center', bbox_to_anchor=(0.5, 1.2), ncol=5)
     plt.tight_layout()
     plt.grid()
 

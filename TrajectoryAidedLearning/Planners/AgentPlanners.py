@@ -173,8 +173,7 @@ class AgentTester:
 
         self.actor = torch.load(self.path + '/' + run.run_name + "_actor.pth")
 
-        architecture_type = select_architecture(run.architecture)
-        self.architecture = architecture_type(run, conf)
+        self.architecture = FastArchitecture(run, conf)
 
         print(f"Agent loaded: {run.run_name}")
 
