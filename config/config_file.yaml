@@ -1,0 +1,41 @@
+# Vehicle params
+max_v: 8
+max_a: 8.5
+max_steer: 0.4
+max_d_dot: 3.2
+mu: 0.523
+m: 3.47
+g: 9.81
+l_r: 0.171
+l_f: 0.158
+
+# agent parameters
+n_beams: 20               # number of beams used by agent
+range_finder_scale: 10     # scaling of beams for NN
+h_size: 100               # size of hidden layers in NN
+
+#simulator
+sim_steps: 10              # Number of simulator steps per planning step
+max_steps: 1000
+max_laptime: 240
+
+# PurePursuit planner values
+lookahead: 1.5
+# lookahead: 0.82
+v_gain: 0.9
+v_min_plan: 1            # minimum speed for selecting a steering angle to prevent instability
+
+r_velocity: 1
+r_distance: 0.5
+constant_reward: 1
+
+r_time: 0.05
+
+#save_paths
+vehicle_path: "Data/Vehicles/"
+kernel_path: "Data/Kernels/"
+dynamics_path: "Data/Dynamics/"
+
+lookahead_time_step: 0.2 # Planning timestep used the supervisor
+
+

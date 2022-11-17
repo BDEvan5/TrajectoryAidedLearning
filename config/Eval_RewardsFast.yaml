@@ -1,0 +1,52 @@
+
+test_name: "Eval_RewardsFast"
+
+architecture: "fast"
+n_scans: 2
+train_mode: "Std"
+test_mode: "Std"
+
+n: 5
+set_n: 1
+
+random_seed: 10000
+
+n_train_steps: 100000
+# n_test_laps: 20
+n_test_laps: 50
+
+
+runs:
+  - map_name: "f1_esp"
+    reward: "Cth"
+    max_speed: 5
+  - map_name: "f1_mco"
+    reward: "Cth"
+    max_speed: 5
+
+  - map_name: "f1_esp"
+    reward: "Progress"
+    max_speed: 5
+  - map_name: "f1_mco"
+    reward: "Progress"
+    max_speed: 5
+
+  - map_name: "f1_esp"
+    reward: "Cth"
+    max_speed: 8
+  - map_name: "f1_mco"
+    reward: "Cth"
+    max_speed: 8
+
+  - map_name: "f1_esp"
+    reward: "Progress"
+    max_speed: 8
+  - map_name: "f1_mco"
+    reward: "Progress"
+    max_speed: 8
+
+
+
+
+
+
