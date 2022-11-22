@@ -15,7 +15,8 @@ n_train_steps: 100000
 n_test_laps: 20
 # n_test_laps: 50
 
-max_speed: 8
+max_speed: 7
+reward: "TAL"
 # max_speed: 5
 
 runs:

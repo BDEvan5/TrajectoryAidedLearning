@@ -82,7 +82,7 @@ def make_slip_compare_graph():
 
 def compare_5_7_cth_speed():
     map_name = "f1_esp"
-    path  = "Data/Vehicles/Eval_MaxSpeed/"
+    path  = "Data/Vehicles/Cth_speeds/"
     a1 = path + f"fast_Std_Std_Cth_{map_name}_5_1_1/"
     a2 = path + f"fast_Std_Std_Cth_{map_name}_7_1_1/"
 
@@ -92,7 +92,7 @@ def compare_5_7_cth_speed():
     xs2 = data2.generate_state_progress_list()*100
 
     fig, (ax1) = plt.subplots(1, 1, figsize=(4.2, 1.7), sharex=True)
-    ax1.plot(xs1, data1.states[:, 3], color=pp[1], label="5 m/s", linewidth=2)
+    ax1.plot(xs1[:-1], data1.states[:-1, 3], color=pp[1], label="5 m/s", linewidth=2)
     ax1.plot(xs2[:-1], data2.states[:-1, 3], color=pp[0], label="7 m/s", linewidth=2)
 
     ax1.set_ylabel("Speed (m/s)")
@@ -102,7 +102,7 @@ def compare_5_7_cth_speed():
     # ax2.set_ylabel("Slip Angle")
 
     plt.grid(True)
-    plt.xlim(-2, 50)
+    plt.xlim(-2, 40)
     plt.tight_layout()
 
     name = path + "compare_5_7_cth_speed"
@@ -111,7 +111,7 @@ def compare_5_7_cth_speed():
 
 def compare_5_7_cth_slip():
     map_name = "f1_esp"
-    path  = "Data/Vehicles/Eval_MaxSpeed/"
+    path  = "Data/Vehicles/Cth_speeds/"
     a1 = path + f"fast_Std_Std_Cth_{map_name}_5_1_1/"
     a2 = path + f"fast_Std_Std_Cth_{map_name}_7_1_1/"
 
@@ -121,23 +121,25 @@ def compare_5_7_cth_slip():
     xs2 = data2.generate_state_progress_list()*100
 
     fig, (ax1) = plt.subplots(1, 1, figsize=(4.2, 1.7), sharex=True)
+    s1 = np.rad2deg(data1.states[:-1, 6])
+    ax1.plot(xs1[:-1], s1, color=pp[1], label="5", linewidth=2, alpha=0.88)
     s2 = np.rad2deg(data2.states[:, 6])
     ax1.plot(xs2, s2, color=pp[0], label="7", linewidth=2, alpha=0.9)
-    s1 = np.rad2deg(data1.states[:, 6])
-    ax1.plot(xs1, s1, color=pp[1], label="5", linewidth=2, alpha=0.88)
 
     ax1.set_ylabel("Slip angle (deg)")
     ax1.set_xlabel("Track progress (%)")
-    ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.25, 1.02))
-    ax1.yaxis.set_major_locator(MultipleLocator(20))
+    ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.77, 0.15))
+    # ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.7, 1.02))
+    # ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.35, 1.02))
+    ax1.yaxis.set_major_locator(MultipleLocator(25))
 
     plt.grid(True)
-    plt.xlim(-2, 50)
+    plt.xlim(-2, 40)
     plt.tight_layout()
 
     name = path + "compare_5_7_cth_slip"
     std_img_saving(name)
 
 
-# compare_5_7_cth_speed()
+compare_5_7_cth_speed()
 compare_5_7_cth_slip()
