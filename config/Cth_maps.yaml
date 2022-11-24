@@ -17,7 +17,7 @@ n_test_laps: 20
 # n_test_laps: 50
 
 reward: "Cth"
-max_speed: 7
+max_speed: 6
 
 runs:
   - map_name: "f1_esp"
