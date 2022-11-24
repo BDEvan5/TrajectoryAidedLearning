@@ -6,6 +6,7 @@ from matplotlib.ticker import MultipleLocator
 def load_time_data(folder, map_name):
     files = glob.glob(folder + f"Results_*{map_name}*.txt")
     files.sort()
+    print(files)
     keys = ["time", "success", "progress"]
     mins, maxes, means = {}, {}, {}
     for key in keys:
@@ -22,6 +23,8 @@ def load_time_data(folder, map_name):
                 means[keys[j]].append(float(lines[1].split(",")[1+j]))
 
     return mins, maxes, means
+
+
 
 pp_light = ["#EC7063", "#5499C7", "#58D68D", "#F4D03F", "#AF7AC5"]            
 pp_dark = ["#943126", "#1A5276", "#1D8348", "#9A7D0A", "#633974"]
@@ -108,9 +111,94 @@ def make_speed_barplot_success(folder):
     
     std_img_saving(name)
    
+def plot_barplot_series(folder):
+    keys = ["time", "success", "progress"]
+    ylabels = "Time (s), Success (%), Progress (%)".split(", ")
+    
+    for i in range(len(keys)):
+        make_reward_barplot(folder, keys[i], ylabels[i])
+        
+   
+def make_reward_barplot(folder, key, ylabel):
+    # plt.figure(figsize=(3.3, 1.5))
+    plt.figure(figsize=(2.2, 2.4))
+    xs = np.arange(2)
+    
+    barWidth = 0.4
+    w = 0.05
+    br1 = xs - barWidth/2
+    br2 = [x + barWidth for x in br1]
+
+    mins, maxes, means = load_time_data(folder, "Progress")
+    
+    plt.bar(br1, means[key], color=pp_light[2], width=barWidth, label="Prog.")
+    plot_error_bars(br1, mins[key], maxes[key], pp_darkest[2], w)
+    
+    mins, maxes, means = load_time_data(folder, "Cth")
+    plt.bar(br2, means[key], color=pp_light[0], width=barWidth, label="Cth")
+    plot_error_bars(br2, mins[key], maxes[key], pp_darkest[0], w)
+        
+    plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
+    plt.ylabel(ylabel)
+    plt.xticks([0, 1], ["ESP", "MCO"])
+    
+    plt.legend(ncol=2, loc="center", bbox_to_anchor=(0.5, -0.25))
+        
+    name = folder + f"RewardBarplot_{key}_{folder.split('/')[-2]}"
+    
+    std_img_saving(name)
+   
+         
+def make_reward_barplot_combined(folder):
+    # plt.figure(figsize=(3.3, 1.5))
+    fig, axs = plt.subplots(1, 2, figsize=(4.5, 2.0))
+    # plt.figure(figsize=(2.2, 2.4))
+    xs = np.arange(2)
+    
+    barWidth = 0.4
+    w = 0.05
+    br1 = xs - barWidth/2
+    br2 = [x + barWidth for x in br1]
+
+    keys = ["time", "progress"]
+    ylabels = "Time (s), Progress (%)".split(", ")
+
+    for z in range(2):
+        key = keys[z]
+        
+        mins, maxes, means = load_time_data(folder, "Progress")
+        
+        axs[z].bar(br1, means[key], color=pp_light[2], width=barWidth, label="Progress")
+        plt.sca(axs[z])
+        plot_error_bars(br1, mins[key], maxes[key], pp_darkest[2], w)
+        
+        mins, maxes, means = load_time_data(folder, "Cth")
+        axs[z].bar(br2, means[key], color=pp_light[0], width=barWidth, label="Cross-track & Heading")
+        plot_error_bars(br2, mins[key], maxes[key], pp_darkest[0], w)
+            
+        axs[z].xaxis.set_major_locator(MultipleLocator(1))
+        axs[z].set_ylabel(ylabels[z])
+        axs[z].set_xticks([0, 1], ["ESP", "MCO"])
+        axs[z].grid(True)
+        
+    handles, labels = axs[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=2, loc="center", bbox_to_anchor=(0.55, -0.01))
+    # plt.legend(ncol=2, loc="center", bbox_to_anchor=(0.5, -0.25))
+    # fig.legend(ncol=2, loc="center", bbox_to_anchor=(0.5, -0.05))
+    # fig.legend(["Progress", "Cth"], ncol=2, loc="center", bbox_to_anchor=(0.5, -0.05))
+        
+    name = folder + f"RewardBarplot_combined_{folder.split('/')[-2]}"
+    
+    std_img_saving(name)
+   
+      
+
+   
    
    
     
 # make_speed_barplot_times("Data/Vehicles/Cth_speedMaps/")
-make_speed_barplot_success("Data/Vehicles/Cth_speedMaps/")
 # make_speed_barplot_success("Data/Vehicles/Cth_speedMaps/")
+# make_speed_barplot_success("Data/Vehicles/Cth_speedMaps/")
+# plot_barplot_series("Data/Vehicles/CthVsProgress/")
+make_reward_barplot_combined("Data/Vehicles/CthVsProgress/")

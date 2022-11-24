@@ -28,9 +28,12 @@ class VehicleData:
             line = lines[2] # first lap is heading
             line = line.split(',')
             
-            self.times.append(float(line[8]))
-            self.success_rates.append(float(line[12]))
-            self.avg_progresses.append(float(line[7]))
+            time = float(line[8])
+            if not np.isnan(time): self.times.append(time)
+            success = float(line[12])
+            if not np.isnan(success): self.success_rates.append(success)
+            avg_progress = float(line[7])
+            if not np.isnan(avg_progress): self.avg_progresses.append(avg_progress)
             
     def save_data(self):
         functions = [np.mean, np.std, np.amin, np.amax]
@@ -77,9 +80,10 @@ def aggregate_runs(path):
         
     for i in range(len(id_list)):
         
-        v = VehicleData(id_list[i])
+        v = VehicleData(id_list[i], n=5, prefix=path)
         
 
 
 
-aggregate_runs("Data/Vehicles/Cth_speedMaps/")
+# aggregate_runs("Data/Vehicles/Cth_speedMaps/")
+aggregate_runs("Data/Vehicles/CthVsProgress/")
