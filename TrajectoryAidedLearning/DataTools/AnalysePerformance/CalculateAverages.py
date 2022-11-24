@@ -23,19 +23,22 @@ class VehicleData:
         folder = self.prefix + name + "_" + str(n) 
         
         #open summary stats
-        with open(f"{folder}/SummaryStatistics.txt", 'r') as file:
-            lines = file.readlines()
-            line = lines[2] # first lap is heading
-            line = line.split(',')
-            
-            time = float(line[8])
-            if not np.isnan(time): 
-                self.times.append(time)
-                success = float(line[12])
-                self.success_rates.append(success)
+        try:
+            with open(f"{folder}/SummaryStatistics.txt", 'r') as file:
+                lines = file.readlines()
+                line = lines[2] # first lap is heading
+                line = line.split(',')
                 
-            avg_progress = float(line[7])
-            self.avg_progresses.append(avg_progress)
+                time = float(line[8])
+                if not np.isnan(time): 
+                    self.times.append(time)
+                    success = float(line[12])
+                    self.success_rates.append(success)
+                    
+                avg_progress = float(line[7])
+                self.avg_progresses.append(avg_progress)
+        except:
+            print(f"File not opened: {folder}")
             
     def save_data(self):
         functions = [np.mean, np.std, np.amin, np.amax]
@@ -81,15 +84,20 @@ def aggregate_runs(path):
         vehicle_id = vehicle_name[:-2]
         print(vehicle_id)
         
-        if not vehicle_id in id_list:
+        if not vehicle_id in id_list and not vehicle_id[0:2] == "PP":
             id_list.append(vehicle_id)
         
     for i in range(len(id_list)):
-        # v = VehicleData(id_list[i], n=5, prefix=path)
-        v = VehicleData(id_list[i], n=3, prefix=path)
+        v = VehicleData(id_list[i], n=2, prefix=path)
+        # v = VehicleData(id_list[i], n=3, prefix=path)
         
 
 
 
-aggregate_runs("Data/Vehicles/Cth_speedMaps/")
+# aggregate_runs("Data/Vehicles/Cth_speedMaps/")
+# aggregate_runs("Data/Vehicles/Cth_speeds/")
+# aggregate_runs("Data/Vehicles/TAL_speeds/")
 # aggregate_runs("Data/Vehicles/CthVsProgress/")
+
+aggregate_runs("Data/Vehicles/TAL_maps/")
+# aggregate_runs("Data/Vehicles/Cth_maps/")
