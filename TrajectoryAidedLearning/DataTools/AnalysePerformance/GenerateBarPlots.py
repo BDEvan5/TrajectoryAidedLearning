@@ -198,7 +198,7 @@ def make_speed_barplot_cth_vs_tal():
     
     plt.legend(framealpha=0.95)
         
-    name = "Data/Vehicles/" + f"compareBarPlot_{key}"
+    name = "Data/Images/" + f"compareBarPlot_{key}"
     
     std_img_saving(name)
    
@@ -246,7 +246,7 @@ def make_barplot_cth_vs_tal_6(key, ylabel):
     
     plt.legend(framealpha=0.95, ncol=2)
         
-    name = "Data/Vehicles/" + f"CthVsTal6_{key}"
+    name = "Data/Images/" + f"CthVsTal6_{key}"
     
     std_img_saving(name)
    
@@ -282,10 +282,12 @@ def make_barplot_cth_vs_tal_6_combined():
         plt.ylabel(ylabels[z])
         plt.grid(True)
     
+    axs[0].yaxis.set_major_locator(MultipleLocator(15))
+    axs[1].yaxis.set_major_locator(MultipleLocator(25))
     handles, labels = axs[0].get_legend_handles_labels()
     fig.legend(handles, labels, ncol=2, loc="center", bbox_to_anchor=(0.55, 0.01))
         
-    name = "Data/Vehicles/" + f"CthVsTal6_combined"
+    name = "Data/Images/" + f"CthVsTal6_combined"
     
     std_img_saving(name)
    
@@ -323,7 +325,7 @@ def make_barplot_cth_vs_tal_6_success():
     # plt.legend(framealpha=0.95, ncol=1, loc="center", bbox_to_anchor=(1.2, 0.5))
     plt.legend(ncol=2, loc="center", bbox_to_anchor=(0.5, 1.1))
         
-    name = "Data/Vehicles/" + f"CthVsTal6_{key}_export"
+    name = "Data/Images/" + f"CthVsTal6_{key}_export"
     
     std_img_saving(name)
    
@@ -357,12 +359,12 @@ def make_comparison_barplot():
     
     plt.grid(True)
     
-    name = "Data/Vehicles/barplot_comparison"
+    name = "Data/Images/barplot_comparison"
     std_img_saving(name)
 
    
-make_comparison_barplot()
-# make_barplot_cth_vs_tal_6_combined()
+# make_comparison_barplot()
+make_barplot_cth_vs_tal_6_combined()
 # plot_six_barplot_series()
 # make_barplot_cth_vs_tal_6_success()
 # plot_speed_barplot_series("Data/Vehicles/Cth_speedMaps/")

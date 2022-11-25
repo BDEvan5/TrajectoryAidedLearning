@@ -88,7 +88,7 @@ def aggregate_runs(path):
             id_list.append(vehicle_id)
         
     for i in range(len(id_list)):
-        v = VehicleData(id_list[i], n=2, prefix=path)
+        v = VehicleData(id_list[i], n=5, prefix=path)
         # v = VehicleData(id_list[i], n=3, prefix=path)
         
 
