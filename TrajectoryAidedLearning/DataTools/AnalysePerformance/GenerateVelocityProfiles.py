@@ -140,7 +140,8 @@ def esp_right_limits():
 
 def analyse_folder():
 
-    path = "Data/Vehicles/Cth_speeds/"
+    path = "Data/Vehicles/TAL_speeds/"
+    # path = "Data/Vehicles/Cth_speeds/"
     # path = "Data/Vehicles/PP_speeds/"
     # path = "Data/Vehicles/Eval_MaxSpeed/"
     

@@ -214,8 +214,8 @@ class TestSimulation():
 
 
 def main():
-    # run_file = "PP_speeds"
-    run_file = "PP_maps6"
+    run_file = "PP_speeds"
+    # run_file = "PP_maps8"
     # run_file = "Eval_RewardsSlow"
     
     
