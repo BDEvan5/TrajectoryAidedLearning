@@ -41,6 +41,47 @@ def plot_speed_barplot_series(folder):
         make_speed_barplot(folder, keys[i], ylabels[i])
         
         
-       
+def Cth_speeds_Barplot():
+    folder = "Data/Vehicles/Cth_speedMaps/"
+    fig, axs = plt.subplots(1, 2, figsize=(4.5, 2.0))
+    xs = np.arange(4)
+    
+    barWidth = 0.4
+    w = 0.05
+    br1 = xs - barWidth/2
+    br2 = [x + barWidth for x in br1]
+
+    keys = ["time", "success"]
+    ylabels = "Time (s), Success (%)".split(", ")
+
+    for z in range(2):
+        key = keys[z]
+        
+        mins, maxes, means = load_time_data(folder, "gbr")
+        
+        axs[z].bar(br1, means[key][0:4], color=pp_light[1], width=barWidth, label="GBR")
+        plt.sca(axs[z])
+        plot_error_bars(br1, mins[key][0:4], maxes[key], pp_darkest[1], w)
+        
+        mins, maxes, means = load_time_data(folder, "mco")
+        axs[z].bar(br2, means[key][0:4], color=pp_light[5], width=barWidth, label="MCO")
+        plot_error_bars(br2, mins[key][0:4], maxes[key], pp_darkest[5], w)
+            
+        axs[z].xaxis.set_major_locator(MultipleLocator(1))
+        axs[z].set_ylabel(ylabels[z])
+        axs[z].set_xticks([0, 1, 2, 3], [4, 5, 6, 7])
+        axs[z].grid(True)
+        
+    handles, labels = axs[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncol=2, loc="center", bbox_to_anchor=(0.55, -0.01))
+    axs[0].set_xlabel("Maximum speed (m/s)")
+    axs[1].set_xlabel("Maximum speed (m/s)")
+        
+    name = folder + f"{folder.split('/')[-2]}_Barplot"
+    
+    std_img_saving(name)
+   
+      
+Cth_speeds_Barplot()
 #TODO: fix this 
-plot_speed_barplot_series("Data/Vehicles/Cth_speedMaps/")
+# plot_speed_barplot_series("Data/Vehicles/Cth_speedMaps/")

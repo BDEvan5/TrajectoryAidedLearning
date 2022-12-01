@@ -70,10 +70,12 @@ def CthVsProgress_TrainingGraphs():
             axs[z].yaxis.set_major_locator(MultipleLocator(25))
             axs[z].grid(True)
             axs[z].set_xlabel("Training Steps (x1000)")
+        
+        axs[z].xaxis.set_major_locator(MultipleLocator(25))
             
     plt.ylim(0, 100)
     axs[0].set_ylabel("Track Progress %")
-    fig.legend(loc='center', ncol=2, bbox_to_anchor=(0.5, 0.25), framealpha=0.98)
+    fig.legend(loc='center', ncol=2, bbox_to_anchor=(0.5, -0.00), framealpha=0.98)
 
     name = p + f"CthVsProgress_Training_{speed}"
     std_img_saving(name)

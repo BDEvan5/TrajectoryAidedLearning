@@ -140,5 +140,49 @@ def compare_5_7_cth_slip():
     std_img_saving(name)
 
 
-compare_5_7_cth_speed()
-compare_5_7_cth_slip()
+def Cth_speed_slip_profile():
+    map_name = "f1_esp"
+    path  = "Data/Vehicles/Cth_speeds/"
+    a1 = path + f"fast_Std_Std_Cth_{map_name}_5_1_1/"
+    a2 = path + f"fast_Std_Std_Cth_{map_name}_7_1_1/"
+
+    data1 = TestLapData(a1, 2)
+    data2 = TestLapData(a2, 2)
+    xs1 = data1.generate_state_progress_list()*100
+    xs2 = data2.generate_state_progress_list()*100
+
+    fig, (ax0, ax1) = plt.subplots(2, 1, figsize=(4.2, 2.5), sharex=True)
+    
+    ax0.plot(xs1[:-1], data1.states[:-1, 3], color=pp[1], label="5 m/s", linewidth=2)
+    ax0.plot(xs2[:-1], data2.states[:-1, 3], color=pp[0], label="7 m/s", linewidth=2)
+    ax0.yaxis.set_major_locator(MultipleLocator(2))
+
+    ax0.set_ylabel("Speed (m/s)")
+    ax0.grid(True)
+    
+    s1 = np.rad2deg(data1.states[:-1, 6])
+    ax1.plot(xs1[:-1], s1, color=pp[1], linewidth=2, alpha=0.88)
+    s2 = np.rad2deg(data2.states[:, 6])
+    ax1.plot(xs2, s2, color=pp[0], linewidth=2, alpha=0.9)
+
+    ax1.set_ylabel("Slip angle (deg)")
+    ax1.set_xlabel("Track progress (%)")
+    # ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.77, 0.15))
+    # ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.7, 1.02))
+    # ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.35, 1.02))
+    ax1.yaxis.set_major_locator(MultipleLocator(25))
+    
+    fig.legend(ncol=2, loc='center', bbox_to_anchor=(0.5, 0.))
+
+    plt.grid(True)
+    plt.xlim(-2, 40)
+    plt.tight_layout()
+
+    name = path + "Cth_speed_slip_profile"
+    std_img_saving(name)
+
+
+
+Cth_speed_slip_profile()
+# compare_5_7_cth_speed()
+# compare_5_7_cth_slip()
