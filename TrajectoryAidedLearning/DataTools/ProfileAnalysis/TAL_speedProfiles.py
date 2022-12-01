@@ -7,6 +7,8 @@ from RacingRewards.RewardSignals.StdTrack import StdTrack
 
 from TrajectoryAidedLearning.Utils.utils import *
 from TrajectoryAidedLearning.DataTools.TrainingGraphs.TrainingUtils import *
+from TrajectoryAidedLearning.DataTools.plotting_utils import *
+
 
 class TestLapData:
     def __init__(self, path, lap_n=0):
@@ -159,7 +161,52 @@ def compare_tal_pp_cth_slip_6():
     std_img_saving(name)
 
 
-def compare_tal_pp_cth_speed_8():
+def TAL_baseline_PP_slip_speed_6():
+    map_name = "f1_esp"
+    path  = "Data/Vehicles/"
+    a1 = path + f"Cth_speeds/fast_Std_Std_Cth_{map_name}_6_1_1/"
+    a2 = path + f"TAL_speeds/fast_Std_Std_TAL_{map_name}_6_1_1/"
+    a3 = path + f"PP_speeds/PP_PP_Std_PP_{map_name}_6_1_0/"
+
+    
+    colors = ["#9B59B6", "#E67E22", "#2ECC71"]
+    vehicles = [a1, a2, a3]
+    labels = ["Baseline", "TAL","PP"]
+    
+    fig, (ax0, ax1) = plt.subplots(2, 1, figsize=(4.2, 2.7), sharex=True)
+    for i in range(len(vehicles)):
+        vehicle = TestLapData(vehicles[i], 0)
+        xs = vehicle.generate_state_progress_list()*100
+        ax0.plot(xs, vehicle.states[:, 3], color=colors[i], label=labels[i], linewidth=2)
+
+        
+        vehicle = TestLapData(vehicles[i], 0)
+        xs = vehicle.generate_state_progress_list()*100
+        slip = np.rad2deg(vehicle.states[:, 6])
+        slip = np.abs(slip)
+        ax1.plot(xs, slip, color=colors[i], label=labels[i], linewidth=2)
+        
+
+    ax1.set_ylabel("Slip angle (deg)")
+    ax0.set_ylabel("Speed (m/s)")
+    ax1.set_xlabel("Track progress (%)")
+    handles, labels = ax1.get_legend_handles_labels()
+    h2 = [handles[1], handles[0], handles[2]]
+    l2 = [labels[1], labels[0], labels[2]]
+    fig.legend(h2, l2, ncol=3, loc="center", bbox_to_anchor=(0.5, 0))
+    ax1.yaxis.set_major_locator(MultipleLocator(10))
+    ax0.yaxis.set_major_locator(MultipleLocator(2))
+    
+    ax0.grid(True)
+    plt.grid(True)
+    plt.xlim(-2, 40)
+    plt.tight_layout()
+
+    name = "Data/Images/TAL_baseline_PP_slip_speed_6"
+    std_img_saving(name)
+
+
+def TAL_PP_speed_profile_8():
     map_name = "f1_esp"
     path  = "Data/Vehicles/"
     # a1 = path + f"Cth_speeds/fast_Std_Std_Cth_{map_name}_6_1_1/"
@@ -170,10 +217,6 @@ def compare_tal_pp_cth_speed_8():
     vehicles = [a3, a2]
     labels = ["PP", "TAL"]
     
-    # colors = ["#E67E22", "#2ECC71", "#9B59B6"]
-    # vehicles = [a2, a3]
-    # labels = ["TAL", "PP"]
-    
     fig, (ax1) = plt.subplots(1, 1, figsize=(4.2, 1.7), sharex=True)
     for i in range(len(vehicles)):
         vehicle = TestLapData(vehicles[i], 0)
@@ -182,7 +225,7 @@ def compare_tal_pp_cth_speed_8():
 
     ax1.set_ylabel("Speed (m/s)")
     ax1.set_xlabel("Track progress (%)")
-    ax1.legend(ncol=3)
+    fig.legend(ncol=3, loc="center", bbox_to_anchor=(0.5, 0))
     ax1.yaxis.set_major_locator(MultipleLocator(2))
     # ax2.set_ylabel("Slip Angle")
 
@@ -190,42 +233,10 @@ def compare_tal_pp_cth_speed_8():
     plt.xlim(-2, 40)
     plt.tight_layout()
 
-    name = "Data/Images/compare_speed_tal_pp_8"
+    name = "Data/Images/TAL_PP_speed_profile_8"
     std_img_saving(name)
 
 
-def compare_5_7_cth_slip():
-    map_name = "f1_esp"
-    path  = "Data/Vehicles/Cth_speeds/"
-    a1 = path + f"fast_Std_Std_Cth_{map_name}_5_1_1/"
-    a2 = path + f"fast_Std_Std_Cth_{map_name}_7_1_1/"
 
-    data1 = TestLapData(a1, 2)
-    data2 = TestLapData(a2, 2)
-    xs1 = data1.generate_state_progress_list()*100
-    xs2 = data2.generate_state_progress_list()*100
-
-    fig, (ax1) = plt.subplots(1, 1, figsize=(4.2, 1.7), sharex=True)
-    s1 = np.rad2deg(data1.states[:-1, 6])
-    ax1.plot(xs1[:-1], s1, color=pp[1], label="5", linewidth=2, alpha=0.88)
-    s2 = np.rad2deg(data2.states[:, 6])
-    ax1.plot(xs2, s2, color=pp[0], label="7", linewidth=2, alpha=0.9)
-
-    ax1.set_ylabel("Slip angle (deg)")
-    ax1.set_xlabel("Track progress (%)")
-    ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.77, 0.15))
-    # ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.7, 1.02))
-    # ax1.legend(ncol=2, loc='center', bbox_to_anchor=(0.35, 1.02))
-    ax1.yaxis.set_major_locator(MultipleLocator(25))
-
-    plt.grid(True)
-    plt.xlim(-2, 40)
-    plt.tight_layout()
-
-    name = path + "compare_5_7_cth_slip"
-    std_img_saving(name)
-
-
-# compare_tal_pp_cth_speed()
-# compare_tal_pp_cth_speed_8()
-compare_tal_pp_cth_slip_6()
+# TAL_baseline_PP_slip_speed_6()
+TAL_PP_speed_profile_8()

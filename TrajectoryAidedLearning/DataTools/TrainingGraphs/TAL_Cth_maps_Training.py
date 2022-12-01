@@ -78,7 +78,7 @@ def TAL_Cth_maps_TrainingGraph():
     repeats = 5
     speed = 6
 
-    fig, axs = plt.subplots(1, 2, figsize=(4.8, 1.8), sharey=True)
+    fig, axs = plt.subplots(1, 2, figsize=(4.5, 2), sharey=True)
 
     xs = np.linspace(0, 100, 300)
 
@@ -118,6 +118,7 @@ def TAL_Cth_maps_TrainingGraph():
         plt.gca().fill_between(xs, min_tal, max_tal, color=colors[0], alpha=0.4)
             
         plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))
+        plt.gca().get_xaxis().set_major_locator(MultipleLocator(25))
 
         plt.xlabel("Training Steps (x1000)")
         plt.grid(True)
@@ -129,7 +130,7 @@ def TAL_Cth_maps_TrainingGraph():
     
 
     handles, labels = axs[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc='center', ncol=2, bbox_to_anchor=(0.5, 0.25), framealpha=0.95)
+    fig.legend(handles, labels, loc='center', ncol=2, bbox_to_anchor=(0.5, 0.), framealpha=0.95)
     # fig.legend(loc='center', ncol=2)
 
     name = "Data/Images/" + f"TAL_Cth_maps_TrainingGraph"

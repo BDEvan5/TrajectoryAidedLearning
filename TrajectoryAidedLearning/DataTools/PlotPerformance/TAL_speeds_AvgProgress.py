@@ -11,8 +11,7 @@ def TAL_speeds_AvgProgress():
     cth_folder = "Data/Vehicles/Cth_speeds/"
     tal_folder = "Data/Vehicles/TAL_speeds/"
     
-    plt.figure(figsize=(3.9, 1.9))
-    # plt.figure(figsize=(3.3, 1.9))
+    plt.figure(figsize=(4.5, 2.6))
     xs = np.arange(4, 9)
     
     barWidth = 0.4
@@ -33,10 +32,11 @@ def TAL_speeds_AvgProgress():
     plot_error_bars(br2, mins[key], maxes[key], pp_darkest[5], w)
         
     plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
+    plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))
     plt.xlabel("Maximum speed (m/s)")
     plt.ylabel(ylabel)
     
-    plt.legend(framealpha=0.95)
+    plt.legend(loc="center", ncol=2, bbox_to_anchor=(0.5, -0.52))
         
     name = "Data/Images/" + f"TAL_speeds_AvgProgress"
     
