@@ -7,6 +7,7 @@ from matplotlib.ticker import MultipleLocator, PercentFormatter
 
 from TrajectoryAidedLearning.Utils.utils import *
 from TrajectoryAidedLearning.DataTools.TrainingGraphs.TrainingUtils import *
+from TrajectoryAidedLearning.DataTools.plotting_utils import *
 
 
 
@@ -69,7 +70,7 @@ def CthVsTal_training():
     std_img_saving(name)
 
     
-def CthVsTal_training_two():
+def TAL_Cth_maps_TrainingGraph():
     p_cth = "Data/Vehicles/Cth_maps/"
     p_tal = "Data/Vehicles/TAL_maps/"
 
@@ -131,10 +132,9 @@ def CthVsTal_training_two():
     fig.legend(handles, labels, loc='center', ncol=2, bbox_to_anchor=(0.5, 0.25), framealpha=0.95)
     # fig.legend(loc='center', ncol=2)
 
-    name = "Data/Images/" + f"CthVsTal_training_{speed}_two"
+    name = "Data/Images/" + f"TAL_Cth_maps_TrainingGraph"
     std_img_saving(name)
 
     
     
-# CthVsTal_training()
-CthVsTal_training_two()
+TAL_Cth_maps_TrainingGraph()

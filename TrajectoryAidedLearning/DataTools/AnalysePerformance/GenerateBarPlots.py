@@ -87,41 +87,7 @@ def make_reward_barplot_combined(folder):
    
       
 
-def make_speed_barplot_cth_vs_tal():
-    cth_folder = "Data/Vehicles/Cth_speeds/"
-    tal_folder = "Data/Vehicles/TAL_speeds/"
-    
-    plt.figure(figsize=(3.9, 1.9))
-    # plt.figure(figsize=(3.3, 1.9))
-    xs = np.arange(4, 9)
-    
-    barWidth = 0.4
-    w = 0.05
-    br1 = xs - barWidth/2
-    br2 = [x + barWidth for x in br1]
-    
-    key = "progress"
-    ylabel = "Progress (%)"
 
-    mins, maxes, means = load_time_data(cth_folder, "")
-    
-    plt.bar(br1, means[key], color=pp_light[4], width=barWidth, label="Baseline")
-    plot_error_bars(br1, mins[key], maxes[key], pp_darkest[4], w)
-    
-    mins, maxes, means = load_time_data(tal_folder, "")
-    plt.bar(br2, means[key], color=pp_light[5], width=barWidth, label="TAL")
-    plot_error_bars(br2, mins[key], maxes[key], pp_darkest[5], w)
-        
-    plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
-    plt.xlabel("Maximum speed (m/s)")
-    plt.ylabel(ylabel)
-    
-    plt.legend(framealpha=0.95)
-        
-    name = "Data/Images/" + f"compareBarPlot_{key}"
-    
-    std_img_saving(name)
-   
       
 def plot_six_barplot_series():
     keys = ["time", "success", "progress"]
@@ -169,49 +135,7 @@ def make_barplot_cth_vs_tal_6(key, ylabel):
     name = "Data/Images/" + f"CthVsTal6_{key}"
     
     std_img_saving(name)
-   
-def make_barplot_cth_vs_tal_6_combined():
-    cth_folder = "Data/Vehicles/Cth_maps/"
-    tal_folder = "Data/Vehicles/TAL_maps/"
-    
-    fig, axs = plt.subplots(1, 2, figsize=(4.5, 1.8))
-    xs = np.arange(4)
-    
-    barWidth = 0.4
-    w = 0.05
-    br1 = xs - barWidth/2
-    br2 = [x + barWidth for x in br1]
-    
-    keys = ["time", "success"]
-    ylabels = "Time (s), Success (%)".split(", ")
 
-    for z in range(2):
-        key = keys[z]
-        plt.sca(axs[z])
-        mins, maxes, means = load_time_data(cth_folder, "")
-        
-        plt.bar(br1, means[key], color=pp_light[4], width=barWidth, label="Baseline")
-        plot_error_bars(br1, mins[key], maxes[key], pp_darkest[4], w)
-        
-        mins, maxes, means = load_time_data(tal_folder, "")
-        plt.bar(br2, means[key], color=pp_light[5], width=barWidth, label="TAL")
-        plot_error_bars(br2, mins[key], maxes[key], pp_darkest[5], w)
-            
-        plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
-        plt.xticks([0, 1, 2, 3], ["AUT", "ESP", "GBR", "MCO"])
-        plt.ylabel(ylabels[z])
-        plt.grid(True)
-    
-    axs[0].yaxis.set_major_locator(MultipleLocator(15))
-    axs[1].yaxis.set_major_locator(MultipleLocator(25))
-    handles, labels = axs[0].get_legend_handles_labels()
-    fig.legend(handles, labels, ncol=2, loc="center", bbox_to_anchor=(0.55, 0.01))
-        
-    name = "Data/Images/" + f"CthVsTal6_combined"
-    
-    std_img_saving(name)
-   
-   
 def make_barplot_cth_vs_tal_6_success():
     cth_folder = "Data/Vehicles/Cth_maps/"
     tal_folder = "Data/Vehicles/TAL_maps/"
@@ -253,6 +177,6 @@ def make_barplot_cth_vs_tal_6_success():
 make_barplot_cth_vs_tal_6_combined()
 # plot_six_barplot_series()
 # make_barplot_cth_vs_tal_6_success()
-plot_speed_barplot_series("Data/Vehicles/Cth_speedMaps/")
+# plot_speed_barplot_series("Data/Vehicles/Cth_speedMaps/")
 # plot_barplot_series("Data/Vehicles/CthVsProgress/")
 # make_reward_barplot_combined("Data/Vehicles/CthVsProgress/")

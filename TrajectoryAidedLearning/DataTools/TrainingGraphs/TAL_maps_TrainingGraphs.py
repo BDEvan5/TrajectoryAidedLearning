@@ -8,18 +8,22 @@ from TrajectoryAidedLearning.DataTools.TrainingGraphs.TrainingUtils import *
 from TrajectoryAidedLearning.DataTools.plotting_utils import *
 
 
-def TAL_Speeds_TrainingGraph():
-    p = "Data/Vehicles/TAL_speeds/"
+
+
+
+def TAL_Maps_TrainingProgress():
+    p = "Data/Vehicles/TAL_maps/"
 
     steps_list = []
     progresses_list = []
+    map_names = ["f1_esp", "f1_mco", "f1_gbr", "f1_aut"]
 
     n_repeats = 5
-    for i, v in enumerate(range(4, 9)): 
+    for i, map_name in enumerate(map_names): 
         steps_list.append([])
         progresses_list.append([])
         for j in range(n_repeats):
-            path = p + f"fast_Std_Std_TAL_f1_esp_{v}_1_{j}/"
+            path = p + f"fast_Std_Std_TAL_{map_name}_6_1_{j}/"
             rewards, lengths, progresses, _ = load_csv_data(path)
             steps = np.cumsum(lengths[:-1]) / 1000
             avg_progress = true_moving_average(progresses[:-1], 20)* 100
@@ -28,7 +32,8 @@ def TAL_Speeds_TrainingGraph():
 
     plt.figure(2, figsize=(4.5, 2.1))
 
-    labels = ["4", "5", "6", "7", "8"]
+    # labels = ["4", "5", "6", "7", "8"]
+    labels = ['ESP', "MCO", "GBR", "AUT"]
     # labels = ['4 m/s', '5 m/s', '6 m/s', '7 m/s', '8 m/s']
 
     xs = np.linspace(0, 100, 300)
@@ -48,8 +53,9 @@ def TAL_Speeds_TrainingGraph():
     plt.tight_layout()
     plt.grid()
 
-    name = p + f"TAL_Speed_TrainingGraph"
+    name = p + f"Eval_Maps_TrainingProgress"
     std_img_saving(name)
 
 
-TAL_Speeds_TrainingGraph()
+TAL_Maps_TrainingProgress()
+
