@@ -59,9 +59,6 @@ def smooth_line(steps, progresses, length_xs=300):
     return xs, smooth_line
 
 
-def std_img_saving(name):
-    plt.savefig(name + ".pdf", bbox_inches='tight', pad_inches=0)
-    plt.savefig(name + ".svg", bbox_inches='tight', pad_inches=0)
 
 ### ----
 

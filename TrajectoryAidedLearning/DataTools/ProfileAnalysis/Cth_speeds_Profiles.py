@@ -7,6 +7,8 @@ from RacingRewards.RewardSignals.StdTrack import StdTrack
 
 from TrajectoryAidedLearning.Utils.utils import *
 from TrajectoryAidedLearning.DataTools.TrainingGraphs.TrainingUtils import *
+from TrajectoryAidedLearning.DataTools.plotting_utils import *
+
 
 class TestLapData:
     def __init__(self, path, lap_n=0):
@@ -49,10 +51,7 @@ class TestLapData:
 
 
 def make_slip_compare_graph():
-    # map_name = "f1_gbr"
     map_name = "f1_esp"
-    # pp_path = f"Data/Vehicles/RacingResultsWeekend/PP_Std_{map_name}_1_0/"
-    # agent_path = f"Data/Vehicles/RacingResultsWeekend/Agent_Cth_{map_name}_2_1/"
 
     pp_path = f"Data/Vehicles/PerformanceSpeed/PP_Std5_{map_name}_1_0/"
     agent_path = f"Data/Vehicles/PerformanceSpeed/Agent_Cth_{map_name}_3_0/"
