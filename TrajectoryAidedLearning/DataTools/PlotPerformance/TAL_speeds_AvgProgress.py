@@ -24,12 +24,12 @@ def TAL_speeds_AvgProgress():
 
     mins, maxes, means = load_time_data(cth_folder, "")
     
-    plt.bar(br1, means[key], color=pp_light[4], width=barWidth, label="Baseline")
-    plot_error_bars(br1, mins[key], maxes[key], pp_darkest[4], w)
+    plt.bar(br1, means[key], color=light_blue, width=barWidth, label="Baseline")
+    plot_error_bars(br1, mins[key], maxes[key], dark_blue, w)
     
     mins, maxes, means = load_time_data(tal_folder, "")
-    plt.bar(br2, means[key], color=pp_light[5], width=barWidth, label="TAL")
-    plot_error_bars(br2, mins[key], maxes[key], pp_darkest[5], w)
+    plt.bar(br2, means[key], color=light_red, width=barWidth, label="Trajectory-aided Learning (TAL)")
+    plot_error_bars(br2, mins[key], maxes[key], dark_red, w)
         
     plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
     plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))

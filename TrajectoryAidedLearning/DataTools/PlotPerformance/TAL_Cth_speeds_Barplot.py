@@ -7,12 +7,12 @@ from matplotlib.ticker import MultipleLocator
 
 
    
-def TAL_Cth_maps_Barplot():
-    cth_folder = "Data/Vehicles/Cth_maps/"
-    tal_folder = "Data/Vehicles/TAL_maps/"
+def TAL_Cth_speeds_Barplot():
+    cth_folder = "Data/Vehicles/Cth_speeds/"
+    tal_folder = "Data/Vehicles/TAL_speeds/"
     
-    fig, axs = plt.subplots(1, 2, figsize=(4.5, 1.8))
-    xs = np.arange(4)
+    fig, axs = plt.subplots(1, 2, figsize=(4.5, 2))
+    xs = np.arange(5)
     
     barWidth = 0.4
     w = 0.05
@@ -35,7 +35,10 @@ def TAL_Cth_maps_Barplot():
         plot_error_bars(br2, mins[key], maxes[key], dark_red, w)
             
         plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
-        plt.xticks([0, 1, 2, 3], ["AUT", "ESP", "GBR", "MCO"])
+        # plt.xticks([0, 1, 2, 3], ["AUT", "ESP", "GBR", "MCO"])
+        plt.xticks([0, 1, 2, 3, 4], [4, 5, 6, 7, 8])
+        plt.xlabel("Maximum speed (m/s)")
+        
         plt.ylabel(ylabels[z])
         plt.grid(True)
     
@@ -44,10 +47,10 @@ def TAL_Cth_maps_Barplot():
     handles, labels = axs[0].get_legend_handles_labels()
     fig.legend(handles, labels, ncol=2, loc="center", bbox_to_anchor=(0.55, 0.01))
         
-    name = "Data/Images/" + f"TAL_Cth_maps_Barplot"
+    name = "Data/Images/" + f"TAL_Cth_speeds_Barplot"
     
     std_img_saving(name)
    
    
-TAL_Cth_maps_Barplot()
+TAL_Cth_speeds_Barplot()
    

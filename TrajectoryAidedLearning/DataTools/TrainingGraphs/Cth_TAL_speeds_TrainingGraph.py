@@ -8,7 +8,9 @@ from TrajectoryAidedLearning.DataTools.TrainingGraphs.TrainingUtils import *
 from TrajectoryAidedLearning.DataTools.plotting_utils import *
 
 
-def Cth_speeds_TrainingGraph():
+
+
+def Cth_TAL_speeds_TrainingGraph_small():
     p = "Data/Vehicles/Cth_speeds/"
 
     steps_list = []
@@ -26,9 +28,10 @@ def Cth_speeds_TrainingGraph():
             steps_list[i].append(steps)
             progresses_list[i].append(avg_progress)
 
-    plt.figure(2, figsize=(4.5, 2.3))
-
-    # labels = ["4", "5", "6", "7", "8"]
+    # plt.figure(2, figsize=(4.5, 2.3))
+    fig, axs = plt.subplots(1, 2, figsize=(5.4, 2.2), sharey=True)
+    plt.sca(axs[0])
+    
     labels = ['4 m/s', '5 m/s', '6 m/s', '7 m/s', '8 m/s']
 
     xs = np.linspace(0, 100, 300)
@@ -36,23 +39,13 @@ def Cth_speeds_TrainingGraph():
         min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
         plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
-
-
-    plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))
-
     plt.xlabel("Training Steps (x1000)")
+    plt.grid(True)
+    plt.gca().get_xaxis().set_major_locator(MultipleLocator(25))
     plt.ylabel("Track Progress %")
-    plt.ylim(0, 100)
-    # plt.legend(loc='center', bbox_to_anchor=(1.06, 0.5), ncol=1)
-    plt.legend(loc='center', bbox_to_anchor=(0.5, -0.52), ncol=3)
-    plt.tight_layout()
-    plt.grid()
+    plt.title("Baseline")
 
-    name = p + f"Cth_speeds_TrainingGraph"
-    std_img_saving(name)
-
-def Cth_speeds_TrainingGraph_small():
-    p = "Data/Vehicles/Cth_speeds/"
+    p = "Data/Vehicles/TAL_speeds/"
 
     steps_list = []
     progresses_list = []
@@ -62,40 +55,37 @@ def Cth_speeds_TrainingGraph_small():
         steps_list.append([])
         progresses_list.append([])
         for j in range(n_repeats):
-            path = p + f"fast_Std_Std_Cth_f1_esp_{v}_1_{j}/"
+            path = p + f"fast_Std_Std_TAL_f1_esp_{v}_1_{j}/"
             rewards, lengths, progresses, _ = load_csv_data(path)
             steps = np.cumsum(lengths[:-1]) / 1000
             avg_progress = true_moving_average(progresses[:-1], 20)* 100
             steps_list[i].append(steps)
             progresses_list[i].append(avg_progress)
 
-    plt.figure(2, figsize=(4.5, 2.3))
-
-    # labels = ["4", "5", "6", "7", "8"]
-    labels = ['4 m/s', '5 m/s', '6 m/s', '7 m/s', '8 m/s']
-
+    plt.sca(axs[1])
     xs = np.linspace(0, 100, 300)
     for i in range(len(steps_list)):
         min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
-        plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
+        plt.plot(xs, mean, '-', color=pp[i], linewidth=2)
+        # plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
         plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
-
+    plt.xlabel("Training Steps (x1000)")
+    plt.title("TAL")
 
     plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))
+    plt.gca().get_xaxis().set_major_locator(MultipleLocator(25))
 
-    plt.xlabel("Training Steps (x1000)")
-    plt.ylabel("Track Progress %")
     plt.ylim(0, 100)
     # plt.legend(loc='center', bbox_to_anchor=(1.06, 0.5), ncol=1)
-    plt.legend(loc='center', bbox_to_anchor=(0.5, -0.52), ncol=3)
+    
+    fig.legend(loc='center', bbox_to_anchor=(0.5, -0.), ncol=5)
     plt.tight_layout()
-    plt.grid()
+    plt.grid(True)
 
-    name = p + f"Cth_speeds_TrainingGraph"
+    name = p + f"Cth_TAL_speeds_TrainingGraph"
     std_img_saving(name)
 
-# Cth_speeds_TrainingGraph()
-Cth_speeds_TrainingGraph_small()
+Cth_TAL_speeds_TrainingGraph_small()
 
 
 
