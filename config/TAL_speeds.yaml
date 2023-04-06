@@ -1,5 +1,5 @@
 
-test_name: "TAL_speeds"
+test_name: "TAL_speeds3"
 
 architecture: "fast"
 n_scans: 2
@@ -9,7 +9,7 @@ test_mode: "Std"
 n: 5
 set_n: 1
 
-random_seed: 1000
+random_seed: 10000
 
 n_train_steps: 100000
 n_test_laps: 20
@@ -19,11 +19,11 @@ map_name: "f1_esp"
 reward: "TAL"
 
 runs:
-  - max_speed: 4
-  - max_speed: 5
-  - max_speed: 6
+  # - max_speed: 4
+  # - max_speed: 5
+  # - max_speed: 6
   - max_speed: 7
-  - max_speed: 8
+  # - max_speed: 8
 
 
 

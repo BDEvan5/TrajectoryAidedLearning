@@ -9,7 +9,7 @@ from matplotlib.ticker import MultipleLocator
 
 def TAL_speeds_AvgProgress():
     cth_folder = "Data/Vehicles/Cth_speeds/"
-    tal_folder = "Data/Vehicles/TAL_speeds/"
+    tal_folder = "Data/Vehicles/TAL_speeds_old/"
     
     plt.figure(figsize=(4.5, 2.6))
     xs = np.arange(4, 9)

@@ -165,7 +165,7 @@ def TAL_baseline_PP_slip_speed_6():
     map_name = "f1_esp"
     path  = "Data/Vehicles/"
     a1 = path + f"Cth_speeds/fast_Std_Std_Cth_{map_name}_6_1_1/"
-    a2 = path + f"TAL_speeds/fast_Std_Std_TAL_{map_name}_6_1_1/"
+    a2 = path + f"TAL_speeds_old/fast_Std_Std_TAL_{map_name}_6_1_1/"
     a3 = path + f"PP_speeds/PP_PP_Std_PP_{map_name}_6_1_0/"
 
     
@@ -214,7 +214,7 @@ def TAL_PP_speed_profile_8():
     map_name = "f1_esp"
     path  = "Data/Vehicles/"
     # a1 = path + f"Cth_speeds/fast_Std_Std_Cth_{map_name}_6_1_1/"
-    a2 = path + f"TAL_speeds/fast_Std_Std_TAL_{map_name}_8_1_0/"
+    a2 = path + f"TAL_speeds_old/fast_Std_Std_TAL_{map_name}_8_1_0/"
     a3 = path + f"PP_speeds/PP_PP_Std_PP_{map_name}_8_1_0/"
     
     # colors = ["#2ECC71", "#E67E22"]
@@ -244,5 +244,5 @@ def TAL_PP_speed_profile_8():
 
 
 
-TAL_baseline_PP_slip_speed_6()
-# TAL_PP_speed_profile_8()
+# TAL_baseline_PP_slip_speed_6()
+TAL_PP_speed_profile_8()

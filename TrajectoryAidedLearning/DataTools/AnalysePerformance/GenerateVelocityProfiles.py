@@ -1,4 +1,9 @@
 from matplotlib import pyplot as plt
+# plt.rc('font', family='serif')
+# plt.rc('pdf',fonttype = 42)
+# plt.rc('text', usetex=True)
+plt.rcParams['pdf.use14corefonts'] = True
+
 import numpy as np
 import glob
 import os
@@ -148,7 +153,8 @@ def esp_right_limits():
 def analyse_folder():
 
     # path = "Data/Vehicles/TAL_speeds/"
-    path = "Data/Vehicles/Cth_speeds/"
+    path = "Data/Vehicles/TAL_speeds_old/"
+    # path = "Data/Vehicles/Cth_speeds/"
     # path = "Data/Vehicles/PP_speeds/"
     
     TestData = AnalyseTestLapData()

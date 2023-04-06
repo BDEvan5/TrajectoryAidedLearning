@@ -80,6 +80,13 @@ class TALearningReward:
 
         self.max_steer_diff = 0.8
         self.max_velocity_diff = 2.0
+        
+        # self.beta_c = 1
+        # self.beta_steer_weight = 1
+        # self.beta_velocity_weight = 1
+
+        # self.max_steer_diff = 0.4
+        # self.max_velocity_diff = 1.0
         # self.max_velocity_diff = 4.0
 
     def __call__(self, observation, prev_obs, action):

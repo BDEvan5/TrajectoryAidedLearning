@@ -9,7 +9,7 @@ from matplotlib.ticker import MultipleLocator
    
 def TAL_Cth_speeds_Barplot():
     cth_folder = "Data/Vehicles/Cth_speeds/"
-    tal_folder = "Data/Vehicles/TAL_speeds/"
+    tal_folder = "Data/Vehicles/TAL_speeds_old/"
     
     fig, axs = plt.subplots(1, 2, figsize=(4.5, 2))
     xs = np.arange(5)

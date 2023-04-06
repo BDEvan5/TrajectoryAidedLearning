@@ -52,6 +52,26 @@ def convert_to_min_max_avg(step_list, progress_list, xs):
 
     return min_line, max_line, avg_line
 
+def convert_to_min_max_avg(step_list, progress_list, xs):
+    """Returns the 3 lines 
+        - Minimum line
+        - maximum line 
+        - average line 
+    """ 
+    n = len(step_list)
+
+    ys = np.zeros((n, len(xs)))
+    for i in range(n):
+        ys[i] = np.interp(xs, step_list[i], progress_list[i])
+
+    # iqr = np.iqr(ys, axis=0)
+
+    min_line = np.min(ys, axis=0)
+    max_line = np.max(ys, axis=0)
+    avg_line = np.mean(ys, axis=0)
+
+    return min_line, max_line, avg_line
+
 def smooth_line(steps, progresses, length_xs=300):
     xs = np.linspace(steps[0], steps[-1], length_xs)
     smooth_line = np.interp(xs, steps, progresses)

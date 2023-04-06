@@ -38,14 +38,14 @@ def Cth_TAL_speeds_TrainingGraph_small():
     for i in range(len(steps_list)):
         min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
-        plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
+        # plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
     plt.xlabel("Training Steps (x1000)")
     plt.grid(True)
     plt.gca().get_xaxis().set_major_locator(MultipleLocator(25))
     plt.ylabel("Track Progress %")
     plt.title("Baseline")
 
-    p = "Data/Vehicles/TAL_speeds/"
+    p = "Data/Vehicles/TAL_speeds_old/"
 
     steps_list = []
     progresses_list = []
@@ -68,7 +68,7 @@ def Cth_TAL_speeds_TrainingGraph_small():
         min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2)
         # plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
-        plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
+        # plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
     plt.xlabel("Training Steps (x1000)")
     plt.title("TAL")
 
