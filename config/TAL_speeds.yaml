@@ -1,5 +1,5 @@
 
-test_name: "TAL_speeds3"
+test_name: "TAL_speedsN"
 
 architecture: "fast"
 n_scans: 2
@@ -7,11 +7,11 @@ train_mode: "Std"
 test_mode: "Std"
 
 n: 5
-set_n: 1
+set_n: 2
 
 random_seed: 10000
 
-n_train_steps: 100000
+n_train_steps: 200000
 n_test_laps: 20
 # n_test_laps: 50
 
@@ -21,8 +21,8 @@ reward: "TAL"
 runs:
   # - max_speed: 4
   # - max_speed: 5
-  # - max_speed: 6
-  - max_speed: 7
+  - max_speed: 6
+  # - max_speed: 7
   # - max_speed: 8
 
 

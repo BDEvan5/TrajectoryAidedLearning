@@ -9,13 +9,14 @@ from TrajectoryAidedLearning.DataTools.plotting_utils import *
 
 
 def TAL_Speeds_TrainingGraph():
-    p = "Data/Vehicles/TAL_speeds/"
+    p = "Data/Vehicles/TAL_speedsN/"
 
     steps_list = []
     progresses_list = []
 
     n_repeats = 5
-    for i, v in enumerate(range(4, 9)): 
+    for i, v in enumerate(range(8, 9)): 
+    # for i, v in enumerate(range(4, 9)): 
         steps_list.append([])
         progresses_list.append([])
         for j in range(n_repeats):
@@ -31,12 +32,12 @@ def TAL_Speeds_TrainingGraph():
     # labels = ["4", "5", "6", "7", "8"]
     labels = ['4 m/s', '5 m/s', '6 m/s', '7 m/s', '8 m/s']
 
-    xs = np.linspace(0, 100, 300)
+    xs = np.linspace(0, 200, 300)
     for i in range(len(steps_list)):
         min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
         # plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
-
+        #TODO: add filling for the IQR
 
     plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))
 

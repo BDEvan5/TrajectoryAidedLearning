@@ -44,7 +44,8 @@ class SmartBufferTD3(object):
 
         self.ptr += 1
         
-        if self.ptr == 99999: self.ptr = 0
+        if self.ptr == self.max_size-1: self.ptr = 0 #! crisis
+        # if self.ptr == 99999: self.ptr = 0 #! crisis
 
     def sample(self, batch_size):
         ind = np.random.randint(0, self.ptr-1, size=batch_size)
