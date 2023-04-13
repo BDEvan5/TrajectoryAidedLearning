@@ -72,6 +72,32 @@ def convert_to_min_max_avg(step_list, progress_list, xs):
 
     return min_line, max_line, avg_line
 
+def convert_to_min_max_avg_iqm5(step_list, progress_list, xs):
+    """Returns the 3 lines 
+        - Minimum line
+        - maximum line 
+        - average line 
+    """ 
+    n = len(step_list)
+
+    ys = np.zeros((n, len(xs)))
+    for i in range(n):
+        ys[i] = np.interp(xs, step_list[i], progress_list[i])
+    
+    iq_data = np.zeros((ys.shape[1], 3))
+    for i in range(ys.shape[1]):
+        data = ys[:, i]
+        data = np.delete(data, np.where(data == np.min(data)))
+        data = np.delete(data, np.where(data == np.max(data)))
+        iq_data[i] = data
+    
+    iq_data = iq_data.T # for formatting
+    min_line = np.min(iq_data, axis=0)
+    max_line = np.max(iq_data, axis=0)
+    avg_line = np.mean(iq_data, axis=0)
+
+    return min_line, max_line, avg_line
+
 def smooth_line(steps, progresses, length_xs=300):
     xs = np.linspace(steps[0], steps[-1], length_xs)
     smooth_line = np.interp(xs, steps, progresses)
