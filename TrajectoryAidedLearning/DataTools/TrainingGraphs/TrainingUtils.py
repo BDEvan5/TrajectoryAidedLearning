@@ -87,8 +87,10 @@ def convert_to_min_max_avg_iqm5(step_list, progress_list, xs):
     iq_data = np.zeros((ys.shape[1], 3))
     for i in range(ys.shape[1]):
         data = ys[:, i]
-        data = np.delete(data, np.where(data == np.min(data)))
-        data = np.delete(data, np.where(data == np.max(data)))
+        min_ind = np.where(data == np.min(data))
+        data = np.delete(data, min_ind[0][0])
+        max_ind = np.where(data == np.max(data))
+        data = np.delete(data, max_ind[0])
         iq_data[i] = data
     
     iq_data = iq_data.T # for formatting
