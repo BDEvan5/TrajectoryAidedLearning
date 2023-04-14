@@ -1,5 +1,5 @@
 
-test_name: "TAL_speedsN"
+test_name: "TAL_speedsNew"
 
 architecture: "fast"
 n_scans: 2
@@ -21,9 +21,9 @@ reward: "TAL"
 runs:
   # - max_speed: 4
   # - max_speed: 5
-  - max_speed: 6
+  # - max_speed: 6
   # - max_speed: 7
-  # - max_speed: 8
+  - max_speed: 8
 
 
 
