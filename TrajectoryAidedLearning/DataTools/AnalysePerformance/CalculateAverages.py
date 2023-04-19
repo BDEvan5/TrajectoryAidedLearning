@@ -84,7 +84,7 @@ def aggregate_runs(path):
         vehicle_id = vehicle_name[:-2]
         print(vehicle_id)
         
-        if not vehicle_id in id_list and not vehicle_id[0:2] == "PP":
+        if not vehicle_id in id_list:# and not vehicle_id[0:2] == "PP":
             id_list.append(vehicle_id)
         
     for i in range(len(id_list)):
@@ -99,5 +99,7 @@ def aggregate_runs(path):
 # aggregate_runs("Data/Vehicles/TAL_speeds/")
 # aggregate_runs("Data/Vehicles/CthVsProgress/")
 
-aggregate_runs("Data/Vehicles/TAL_maps/")
+# aggregate_runs("Data/Vehicles/TAL_maps/")
+# aggregate_runs("Data/Vehicles/TAL_maps8/")
+aggregate_runs("Data/Vehicles/PP_maps8/")
 # aggregate_runs("Data/Vehicles/Cth_maps/")

@@ -12,7 +12,7 @@ from TrajectoryAidedLearning.DataTools.plotting_utils import *
 
 
 def TAL_Maps_TrainingProgress():
-    p = "Data/Vehicles/TAL_maps/"
+    p = "Data/Vehicles/TAL_maps8/"
 
     steps_list = []
     progresses_list = []
@@ -23,7 +23,7 @@ def TAL_Maps_TrainingProgress():
         steps_list.append([])
         progresses_list.append([])
         for j in range(n_repeats):
-            path = p + f"fast_Std_Std_TAL_{map_name}_6_1_{j}/"
+            path = p + f"fast_Std_Std_TAL_{map_name}_8_1_{j}/"
             rewards, lengths, progresses, _ = load_csv_data(path)
             steps = np.cumsum(lengths[:-1]) / 1000
             avg_progress = true_moving_average(progresses[:-1], 20)* 100
@@ -38,7 +38,8 @@ def TAL_Maps_TrainingProgress():
 
     xs = np.linspace(0, 100, 300)
     for i in range(len(steps_list)):
-        min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
+        min, max, mean = convert_to_min_max_avg_iqm5(steps_list[i], progresses_list[i], xs)
+        # min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
         plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
 

@@ -176,8 +176,10 @@ class AnalyseTestLapData:
 
 def analyse_folder():
     # path = "Data/Vehicles/Cth_speeds/"
-    path = "Data/Vehicles/Cth_maps/"
+    # path = "Data/Vehicles/Cth_maps/"
     # path = "Data/Vehicles/TAL_speeds/"
+    # path = "Data/Vehicles/TAL_maps8/"
+    path = "Data/Vehicles/PP_maps8/"
     # path = "Data/Vehicles/TAL_maps/"
     # path = "Data/Vehicles/Cth_speedMaps/"
     # path = "Data/Vehicles/CthVsProgress/"

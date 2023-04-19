@@ -8,8 +8,10 @@ from matplotlib.ticker import MultipleLocator
 def LiteratureComparison_Barplot():
     brunnbauer = [32, 73, 0, 0]
     bosello = [23, 56, 48, 42]
-    tal = [22, 47.5, 39, 34.6] # update these times ....
-    pp = [21, 47, 38.5, 35]
+    # tal = [22, 47.5, 39, 34.6] # update these times ....
+    tal = [20.4, 43.4, 35, 32.8] # update these times ....
+    pp = [21.5, 47.1, 38.6, 35.2]
+    # pp = [21, 47, 38.5, 35]
     
     maps = ["AUT", "ESP", "GBR", "MCO"]
     

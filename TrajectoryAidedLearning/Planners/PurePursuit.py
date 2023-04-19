@@ -293,7 +293,12 @@ class PurePursuit:
     def __init__(self, conf, run, init=True):
         self.name = run.run_name
         path = os.getcwd() + f"/Data/Vehicles/" + run.path  + self.name
-        if init: init_file_struct(path)
+        if init: 
+            init_file_struct(path)
+            self.mode = "racing"
+        else:
+            self.mode = "training"
+            
         self.conf = conf
         self.run = run
 
@@ -301,22 +306,20 @@ class PurePursuit:
         self.speed_mode = run.pp_speed_mode
         self.max_speed = run.max_speed
         self.trajectory = Trajectory(run.map_name, run.raceline)
-        # self.trajectory.show_pts()
 
         self.lookahead = conf.lookahead 
         self.v_min_plan = conf.v_min_plan
         self.wheelbase =  conf.l_f + conf.l_r
         self.max_steer = conf.max_steer
-
-
+        
     def plan(self, obs):
         state = obs['state']
         position = state[0:2]
         theta = state[2]
-        # lookahead = 1.8
-        # lookahead = 1.2
-        lookahead = 1 + (self.max_speed/10) * state[3] /  self.max_speed
-        lookahead = 1 + 0.6 * state[3] / 8 # original....
+        if self.mode == "training":
+            lookahead = 1 + 0.6 * state[3] / 8 # original....
+        elif self.mode == "racing":
+            lookahead = 1 + (self.max_speed/10) * state[3] /  self.max_speed
         lookahead_point = self.trajectory.get_current_waypoint(position, lookahead)
 
         if state[3] < self.v_min_plan:

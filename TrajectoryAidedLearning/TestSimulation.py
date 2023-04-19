@@ -49,7 +49,7 @@ class TestSimulation():
             print("_________________________________________________________")
             seed = run.random_seed + 10*run.n
             np.random.seed(seed) # repetition seed
-            torch.set_deterministic(True)
+            torch.use_deterministic_algorithms(True)
             torch.manual_seed(seed)
 
             if run.noise_std > 0:
@@ -214,8 +214,8 @@ class TestSimulation():
 
 
 def main():
-    run_file = "PP_speeds"
-    # run_file = "PP_maps8"
+    # run_file = "PP_speeds"
+    run_file = "PP_maps8"
     # run_file = "Eval_RewardsSlow"
     
     
