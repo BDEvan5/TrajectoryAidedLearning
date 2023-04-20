@@ -7,6 +7,7 @@ n_scans: 2
 train_mode: "Std"
 test_mode: "Std"
 
+start_n: 0
 n: 5
 set_n: 1
 
@@ -20,9 +21,9 @@ reward: "Cth"
 max_speed: 6
 
 runs:
-  - map_name: "f1_esp"
-  - map_name: "f1_mco"
-  - map_name: "f1_aut"
+  # - map_name: "f1_esp"
+  # - map_name: "f1_mco"
+  # - map_name: "f1_aut"
   - map_name: "f1_gbr"
 
 
