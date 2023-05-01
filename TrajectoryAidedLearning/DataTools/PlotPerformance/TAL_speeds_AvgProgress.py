@@ -20,7 +20,7 @@ def TAL_speeds_AvgProgress():
     br2 = [x + barWidth for x in br1]
     
     key = "progress"
-    ylabel = "Progress (%)"
+    ylabel = "Average Track \nProgress (%)"
 
     mins, maxes, means = load_time_data(cth_folder, "")
     

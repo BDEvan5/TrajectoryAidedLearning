@@ -8,8 +8,8 @@ from matplotlib.ticker import MultipleLocator
 
    
 def TAL_Cth_maps_Barplot():
-    cth_folder = "Data/Vehicles/Cth_maps/"
-    tal_folder = "Data/Vehicles/TAL_maps/"
+    cth_folder = "Data/Vehicles/Cth_maps2/"
+    tal_folder = "Data/Vehicles/TAL_maps2/"
     
     fig, axs = plt.subplots(1, 2, figsize=(4.5, 1.8))
     xs = np.arange(4)
@@ -20,7 +20,7 @@ def TAL_Cth_maps_Barplot():
     br2 = [x + barWidth for x in br1]
     
     keys = ["time", "success"]
-    ylabels = "Time (s), Success (%)".split(", ")
+    ylabels = "Time (s), Completion (%)".split(", ")
 
     loading_key = "gbr_6_1_test"
     for z in range(2):

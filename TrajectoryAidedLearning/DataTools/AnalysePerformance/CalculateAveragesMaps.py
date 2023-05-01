@@ -99,5 +99,5 @@ def aggregate_runs(path):
 
 
 
-aggregate_runs("Data/Vehicles/TAL_maps/")
-aggregate_runs("Data/Vehicles/Cth_maps/")
+# aggregate_runs("Data/Vehicles/TAL_maps/")
+aggregate_runs("Data/Vehicles/Cth_maps3/")

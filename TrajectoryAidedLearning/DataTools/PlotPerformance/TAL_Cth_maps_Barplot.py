@@ -20,7 +20,7 @@ def TAL_Cth_maps_Barplot():
     br2 = [x + barWidth for x in br1]
     
     keys = ["time", "success"]
-    ylabels = "Time (s), Success (%)".split(", ")
+    ylabels = "Time (s), Completion (%)".split(", ")
 
     for z in range(2):
         key = keys[z]

@@ -55,10 +55,6 @@ class TestSimulation():
                 torch.use_deterministic_algorithms(True)
                 torch.manual_seed(seed)
 
-                # if run.noise_std > 0:
-                #     self.noise_std = run.noise_std
-                #     self.noise_rng = np.random.default_rng(seed=seed)
-
                 self.env = F110Env(map=test_map)
                 self.map_name = test_map
 
@@ -217,8 +213,8 @@ class TestSimulation():
 
 
 def main():
-    run_file = "Cth_maps"
-    # run_file = "TAL_maps"
+    run_file = "Cth_maps2"
+    # run_file = "TAL_maps2"
     
     
     sim = TestSimulation(run_file)

@@ -181,7 +181,7 @@ class AnalyseTestLapData:
 
 
 def analyse_folder():
-    path = "Data/Vehicles/Cth_maps/"
+    path = "Data/Vehicles/Cth_maps3/"
     # path = "Data/Vehicles/TAL_maps/"
     
 
