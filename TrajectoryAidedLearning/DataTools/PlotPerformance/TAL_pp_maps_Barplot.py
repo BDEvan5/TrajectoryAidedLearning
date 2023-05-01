@@ -8,8 +8,8 @@ from matplotlib.ticker import MultipleLocator
 
    
 def TAL_Cth_maps_Barplot():
-    cth_folder = "Data/Vehicles/Cth_maps/"
-    tal_folder = "Data/Vehicles/TAL_maps/"
+    cth_folder = "Data/Vehicles/PP_maps8/"
+    tal_folder = "Data/Vehicles/TAL_maps8/"
     
     fig, axs = plt.subplots(1, 2, figsize=(4.5, 1.8))
     xs = np.arange(4)
@@ -20,18 +20,20 @@ def TAL_Cth_maps_Barplot():
     br2 = [x + barWidth for x in br1]
     
     keys = ["time", "success"]
-    ylabels = "Time (s), Completion (%)".split(", ")
+    ylabels = "Time (s), Success (%)".split(", ")
 
     for z in range(2):
         key = keys[z]
         plt.sca(axs[z])
         mins, maxes, means = load_time_data(cth_folder, "")
         
-        plt.bar(br1, means[key], color=light_blue, width=barWidth, label="Baseline")
+        plt.bar(br1, means[key], color=light_blue, width=barWidth, label="PP")
+        print(f"PP {key} times: {means[key]}")
         plot_error_bars(br1, mins[key], maxes[key], dark_blue, w)
         
         mins, maxes, means = load_time_data(tal_folder, "")
         plt.bar(br2, means[key], color=light_red, width=barWidth, label="TAL")
+        print(f"TAL {key} times: {means[key]}")
         plot_error_bars(br2, mins[key], maxes[key], dark_red, w)
             
         plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
@@ -44,7 +46,7 @@ def TAL_Cth_maps_Barplot():
     handles, labels = axs[0].get_legend_handles_labels()
     fig.legend(handles, labels, ncol=2, loc="center", bbox_to_anchor=(0.55, 0.01))
         
-    name = "Data/Images/" + f"TAL_Cth_maps_Barplot"
+    name = "Data/Images/" + f"TAL_PP_maps8_Barplot"
     
     std_img_saving(name)
    

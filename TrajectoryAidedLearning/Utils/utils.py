@@ -102,7 +102,11 @@ def setup_run_list(run_file):
 
 
     run_list = []
-    for rep in range(run_dict['n']):
+    try:
+        start_n = run_dict['start_n']
+    except KeyError:
+        start_n = 0
+    for rep in range(start_n, run_dict['n']):
         for run in run_dict['runs']:
             # base is to copy everything from the original
             for key in run_dict.keys():

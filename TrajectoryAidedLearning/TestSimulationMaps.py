@@ -42,45 +42,44 @@ class TestSimulation():
         self.vehicle_state_history = None
 
     def run_testing_evaluation(self):
+        map_names = ["f1_aut", "f1_esp", "f1_gbr", "f1_mco"]
         for run in self.run_data:
-            print(run)
-            print("_________________________________________________________")
-            print(run.run_name)
-            print("_________________________________________________________")
-            seed = run.random_seed + 10*run.n
-            np.random.seed(seed) # repetition seed
-            torch.use_deterministic_algorithms(True)
-            torch.manual_seed(seed)
+            for map_name in map_names:
+                test_map = map_name
+                print(run)
+                print("_________________________________________________________")
+                print(run.run_name)
+                print("_________________________________________________________")
+                seed = run.random_seed + 10*run.n
+                np.random.seed(seed) # repetition seed
+                torch.use_deterministic_algorithms(True)
+                torch.manual_seed(seed)
 
-            if run.noise_std > 0:
-                self.noise_std = run.noise_std
-                self.noise_rng = np.random.default_rng(seed=seed)
+                self.env = F110Env(map=test_map)
+                self.map_name = test_map
 
-            self.env = F110Env(map=run.map_name)
-            self.map_name = run.map_name
+                if run.architecture == "PP": 
+                    planner = PurePursuit(self.conf, run)
+                elif run.architecture == "fast": 
+                    planner = AgentTester(run, self.conf)
+                else: raise AssertionError(f"Planner {run.planner} not found")
 
-            if run.architecture == "PP": 
-                planner = PurePursuit(self.conf, run)
-            elif run.architecture == "fast": 
-                planner = AgentTester(run, self.conf)
-            else: raise AssertionError(f"Planner {run.planner} not found")
+                if run.test_mode == "Std": self.planner = planner
+                else: raise AssertionError(f"Test mode {run.test_mode} not found")
 
-            if run.test_mode == "Std": self.planner = planner
-            else: raise AssertionError(f"Test mode {run.test_mode} not found")
+                self.vehicle_state_history = VehicleStateHistory(run, f"Testing{test_map[-3:].upper()}/")
 
-            self.vehicle_state_history = VehicleStateHistory(run, "Testing/")
+                self.n_test_laps = run.n_test_laps
+                self.lap_times = []
+                self.completed_laps = 0
 
-            self.n_test_laps = run.n_test_laps
-            self.lap_times = []
-            self.completed_laps = 0
+                eval_dict = self.run_testing()
+                run_dict = vars(run)
+                run_dict.update(eval_dict)
 
-            eval_dict = self.run_testing()
-            run_dict = vars(run)
-            run_dict.update(eval_dict)
-
-            save_conf_dict(run_dict)
-
-            self.env.close_rendering()
+                save_conf_dict(run_dict, f"testing_results_{test_map[-3:].upper()}")
+# 
+                self.env.close_rendering()
 
     def run_testing(self):
         assert self.env != None, "No environment created"
@@ -214,9 +213,8 @@ class TestSimulation():
 
 
 def main():
-    # run_file = "PP_speeds"
-    run_file = "PP_maps8"
-    # run_file = "Eval_RewardsSlow"
+    run_file = "Cth_maps2"
+    # run_file = "TAL_maps2"
     
     
     sim = TestSimulation(run_file)

@@ -9,22 +9,24 @@ class VehicleData:
         self.vehicle_id = vehicle_id
         self.prefix = prefix = prefix
         
-        self.times = []
-        self.success_rates = []
-        self.avg_progresses = []
+        map_names = ["f1_aut", "f1_esp", "f1_gbr", "f1_mco"]
+        for map_name in map_names:
+            
+            self.times = []
+            self.success_rates = []
+            self.avg_progresses = []
         
+            for i in range(n):
+                self.process_folder(vehicle_id, i, map_name)
+            
+            self.save_data(map_name)
         
-        for i in range(n):
-            self.process_folder(vehicle_id, i)
-        
-        self.save_data()
-        
-    def process_folder(self, name, n):
+    def process_folder(self, name, n, map_name):
         folder = self.prefix + name + "_" + str(n) 
         
         #open summary stats
         try:
-            with open(f"{folder}/SummaryStatistics.txt", 'r') as file:
+            with open(f"{folder}/SummaryStatistics{map_name[-3:].upper()}.txt", 'r') as file:
                 lines = file.readlines()
                 line = lines[2] # first lap is heading
                 line = line.split(',')
@@ -40,7 +42,7 @@ class VehicleData:
         except:
             print(f"File not opened: {folder}")
             
-    def save_data(self):
+    def save_data(self, map_name):
         functions = [np.mean, np.std, np.amin, np.amax]
         names = ["Mean", "Std", "Min", "Max"]
         
@@ -49,7 +51,7 @@ class VehicleData:
         progresses = np.array(self.avg_progresses)
 
 
-        with open(self.prefix + "Results_" + self.vehicle_id + ".txt", 'w') as file:
+        with open(self.prefix + "Results_" + self.vehicle_id + f"_test{map_name[-3:].upper()}.txt", 'w') as file:
             file.write(f"Metric  , Time              , Success Rate     , Avg Progress    \n")
             for i in range(len(names)):
                 file.write(f"{names[i]}".ljust(10))
@@ -84,7 +86,9 @@ def aggregate_runs(path):
         vehicle_id = vehicle_name[:-2]
         print(vehicle_id)
         
-        if not vehicle_id in id_list:# and not vehicle_id[0:2] == "PP":
+        map_name = vehicle_id[-7:-4]
+        if not vehicle_id in id_list and map_name == "gbr":
+            # if not vehicle_id in id_list and map_name == "esp":
             id_list.append(vehicle_id)
         
     for i in range(len(id_list)):
@@ -94,12 +98,6 @@ def aggregate_runs(path):
 
 
 
-# aggregate_runs("Data/Vehicles/Cth_speedMaps/")
-# aggregate_runs("Data/Vehicles/Cth_speeds/")
-# aggregate_runs("Data/Vehicles/TAL_speeds/")
-# aggregate_runs("Data/Vehicles/CthVsProgress/")
 
 # aggregate_runs("Data/Vehicles/TAL_maps/")
-# aggregate_runs("Data/Vehicles/TAL_maps8/")
-aggregate_runs("Data/Vehicles/PP_maps8/")
-# aggregate_runs("Data/Vehicles/Cth_maps/")
+aggregate_runs("Data/Vehicles/Cth_maps3/")

@@ -1,4 +1,9 @@
 from matplotlib import pyplot as plt
+# plt.rc('font', family='serif')
+# plt.rc('pdf',fonttype = 42)
+# plt.rc('text', usetex=True)
+plt.rcParams['pdf.use14corefonts'] = True
+
 import numpy as np
 import glob
 import os
@@ -12,7 +17,7 @@ from TrajectoryAidedLearning.Utils.StdTrack import StdTrack
 from TrajectoryAidedLearning.Utils.RacingTrack import RacingTrack
 from TrajectoryAidedLearning.Utils.utils import *
 from matplotlib.ticker import MultipleLocator
-from TrajectoryAidedLearning.DataTools.TrainingGraphs.TrainingUtils import *
+from TrajectoryAidedLearning.DataTools.plotting_utils import *
 
 # SAVE_PDF = False
 SAVE_PDF = True
@@ -107,10 +112,13 @@ class AnalyseTestLapData:
         plt.gca().set_aspect('equal', adjustable='box')
 
 
-        # txt = self.vehicle_name.split("_")[2]
+        txt = self.vehicle_name.split("_")[3]
+        if txt == "PP": txt = "Classic"
+        if txt  == "Cth": txt = "Baseline"
         # if len(txt)==5: txt = "SSS"
         # elif len(txt)==3: txt = "PP"
-        # plt.text(20, 50, txt, fontsize=25, ha='left', backgroundcolor='white', color="#1B4F72")
+        # plt.text(300, 400, txt, fontsize=25, ha='left', backgroundcolor='white', color="#1B4F72")
+        # plt.text(1050, 130, txt, fontsize=28, ha='left', backgroundcolor='white', color="#1B4F72")
 
         
         plt.xticks([])
@@ -122,28 +130,33 @@ class AnalyseTestLapData:
         ax.spines['bottom'].set_visible(False)
         ax.spines['left'].set_visible(False)
 
+        l_txt = plt.text(350, 80, txt, fontsize=28, ha='left', backgroundcolor='white', color="#1B4F72")
         name = save_path + f"{self.vehicle_name}_velocity_map_{self.lap_n}_left"
         esp_left_limits()
         std_img_saving(name)
+        # del l_txt
+        l_txt.set_visible(False)
 
+        plt.text(1050, 130, txt, fontsize=28, ha='left', backgroundcolor='white', color="#1B4F72")
         name = save_path + f"{self.vehicle_name}_velocity_map_{self.lap_n}_right"
         esp_right_limits()
         std_img_saving(name)
 
 def esp_left_limits():
-    plt.xlim(20, 500)
-    plt.ylim(70, 520)
+    plt.xlim(20, 620)
+    plt.ylim(50, 520)
 
 def esp_right_limits():
     plt.xlim(900, 1500)
-    plt.ylim(20, 520)
+    plt.ylim(50, 520)
 
 def analyse_folder():
 
-    path = "Data/Vehicles/TAL_speeds/"
+    # path = "Data/Vehicles/TAL_speeds/"
+    # path = "Data/Vehicles/TAL_speeds_old/"
     # path = "Data/Vehicles/Cth_speeds/"
     # path = "Data/Vehicles/PP_speeds/"
-    # path = "Data/Vehicles/Eval_MaxSpeed/"
+    path = "Data/Vehicles/PP_maps6/"
     
     TestData = AnalyseTestLapData()
     TestData.explore_folder(path)

@@ -124,7 +124,8 @@ class VehicleStateHistory:
     def __init__(self, run, folder):
         self.vehicle_name = run.run_name
         self.path = "Data/Vehicles/" + run.path + run.run_name + "/" + folder
-        os.mkdir(self.path)
+        if not os.path.exists(self.path):
+            os.mkdir(self.path)
         self.states = []
         self.actions = []
     

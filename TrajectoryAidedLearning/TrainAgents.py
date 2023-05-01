@@ -45,7 +45,8 @@ class TrainSimulation(TestSimulation):
             print(run)
             seed = run.random_seed + 10*run.n
             np.random.seed(seed) # repetition seed
-            torch.set_deterministic(True)
+            # torch.set_deterministic(True)
+            torch.use_deterministic_algorithms(True)
             torch.manual_seed(seed)
 
             self.env = F110Env(map=run.map_name)
@@ -136,9 +137,9 @@ class TrainSimulation(TestSimulation):
 
 
 def main():
-    run_file = "Cth_maps"
+    # run_file = "Cth_maps"
     # run_file = "Cth_speeds"
-    # run_file = "TAL_maps"
+    run_file = "TAL_maps"
     # run_file = "TAL_speeds"
     # run_file = "Cth_speedMaps"
     # run_file = "CthVsProgress"

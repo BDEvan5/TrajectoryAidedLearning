@@ -9,7 +9,7 @@ from matplotlib.ticker import MultipleLocator
 
 def TAL_speeds_AvgProgress():
     cth_folder = "Data/Vehicles/Cth_speeds/"
-    tal_folder = "Data/Vehicles/TAL_speeds/"
+    tal_folder = "Data/Vehicles/TAL_speeds_old/"
     
     plt.figure(figsize=(4.5, 2.6))
     xs = np.arange(4, 9)
@@ -20,16 +20,16 @@ def TAL_speeds_AvgProgress():
     br2 = [x + barWidth for x in br1]
     
     key = "progress"
-    ylabel = "Progress (%)"
+    ylabel = "Average Track \nProgress (%)"
 
     mins, maxes, means = load_time_data(cth_folder, "")
     
-    plt.bar(br1, means[key], color=pp_light[4], width=barWidth, label="Baseline")
-    plot_error_bars(br1, mins[key], maxes[key], pp_darkest[4], w)
+    plt.bar(br1, means[key], color=light_blue, width=barWidth, label="Baseline")
+    plot_error_bars(br1, mins[key], maxes[key], dark_blue, w)
     
     mins, maxes, means = load_time_data(tal_folder, "")
-    plt.bar(br2, means[key], color=pp_light[5], width=barWidth, label="TAL")
-    plot_error_bars(br2, mins[key], maxes[key], pp_darkest[5], w)
+    plt.bar(br2, means[key], color=light_red, width=barWidth, label="Trajectory-aided Learning (TAL)")
+    plot_error_bars(br2, mins[key], maxes[key], dark_red, w)
         
     plt.gca().get_xaxis().set_major_locator(MultipleLocator(1))
     plt.gca().get_yaxis().set_major_locator(MultipleLocator(25))

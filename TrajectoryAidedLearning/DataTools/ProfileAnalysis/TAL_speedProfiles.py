@@ -165,22 +165,24 @@ def TAL_baseline_PP_slip_speed_6():
     map_name = "f1_esp"
     path  = "Data/Vehicles/"
     a1 = path + f"Cth_speeds/fast_Std_Std_Cth_{map_name}_6_1_1/"
-    a2 = path + f"TAL_speeds/fast_Std_Std_TAL_{map_name}_6_1_1/"
+    a2 = path + f"TAL_speeds_old/fast_Std_Std_TAL_{map_name}_6_1_1/"
     a3 = path + f"PP_speeds/PP_PP_Std_PP_{map_name}_6_1_0/"
 
     
-    colors = ["#9B59B6", "#E67E22", "#2ECC71"]
+    # colors = ["#9B59B6", "#E67E22", "#2ECC71"]
+    colors = [plot_blue, plot_red, plot_green]
     vehicles = [a1, a2, a3]
-    labels = ["Baseline", "TAL","PP"]
+    labels = ["Baseline", "TAL","Classic"]
     
-    fig, (ax0, ax1) = plt.subplots(2, 1, figsize=(4.2, 2.7), sharex=True)
+    fig, (ax0, ax1) = plt.subplots(2, 1, figsize=(4.6, 2.7), sharex=True)
+    lap_n = 1
     for i in range(len(vehicles)):
-        vehicle = TestLapData(vehicles[i], 0)
+        vehicle = TestLapData(vehicles[i], lap_n)
         xs = vehicle.generate_state_progress_list()*100
         ax0.plot(xs, vehicle.states[:, 3], color=colors[i], label=labels[i], linewidth=2)
 
         
-        vehicle = TestLapData(vehicles[i], 0)
+        vehicle = TestLapData(vehicles[i], lap_n)
         xs = vehicle.generate_state_progress_list()*100
         slip = np.rad2deg(vehicle.states[:, 6])
         slip = np.abs(slip)
@@ -191,15 +193,17 @@ def TAL_baseline_PP_slip_speed_6():
     ax0.set_ylabel("Speed (m/s)")
     ax1.set_xlabel("Track progress (%)")
     handles, labels = ax1.get_legend_handles_labels()
-    h2 = [handles[1], handles[0], handles[2]]
-    l2 = [labels[1], labels[0], labels[2]]
+    # h2 = [handles[1], handles[0], handles[2]]
+    # l2 = [labels[1], labels[0], labels[2]]
+    h2, l2 = handles, labels
     fig.legend(h2, l2, ncol=3, loc="center", bbox_to_anchor=(0.5, 0))
     ax1.yaxis.set_major_locator(MultipleLocator(10))
     ax0.yaxis.set_major_locator(MultipleLocator(2))
     
     ax0.grid(True)
     plt.grid(True)
-    plt.xlim(-2, 40)
+    plt.xlim(0, 60)
+    # plt.xlim(-2, 40)
     plt.tight_layout()
 
     name = "Data/Images/TAL_baseline_PP_slip_speed_6"
@@ -210,16 +214,17 @@ def TAL_PP_speed_profile_8():
     map_name = "f1_esp"
     path  = "Data/Vehicles/"
     # a1 = path + f"Cth_speeds/fast_Std_Std_Cth_{map_name}_6_1_1/"
-    a2 = path + f"TAL_speeds/fast_Std_Std_TAL_{map_name}_8_1_0/"
+    a2 = path + f"TAL_speeds_old/fast_Std_Std_TAL_{map_name}_8_1_0/"
     a3 = path + f"PP_speeds/PP_PP_Std_PP_{map_name}_8_1_0/"
     
-    colors = ["#2ECC71", "#E67E22"]
+    # colors = ["#2ECC71", "#E67E22"]
+    colors = [plot_green, plot_red]
     vehicles = [a3, a2]
-    labels = ["PP", "TAL"]
+    labels = ["Classic", "Trajectory-aided learning (TAL)"]
     
-    fig, (ax1) = plt.subplots(1, 1, figsize=(4.2, 1.7), sharex=True)
+    fig, (ax1) = plt.subplots(1, 1, figsize=(4.6, 1.7), sharex=True)
     for i in range(len(vehicles)):
-        vehicle = TestLapData(vehicles[i], 0)
+        vehicle = TestLapData(vehicles[i], 1)
         xs = vehicle.generate_state_progress_list()*100
         ax1.plot(xs, vehicle.states[:, 3], color=colors[i], label=labels[i], linewidth=2)
 
@@ -230,7 +235,8 @@ def TAL_PP_speed_profile_8():
     # ax2.set_ylabel("Slip Angle")
 
     plt.grid(True)
-    plt.xlim(-2, 40)
+    plt.xlim(30, 89)
+    # plt.xlim(-2, 40)
     plt.tight_layout()
 
     name = "Data/Images/TAL_PP_speed_profile_8"
