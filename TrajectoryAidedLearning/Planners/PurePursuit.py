@@ -259,9 +259,7 @@ class Trajectory:
             if i2 == None:
                 return None
             current_waypoint = np.empty((3, ))
-            # x, y
             current_waypoint[0:2] = wpts[i2, :]
-            # speed
             current_waypoint[2] = self.vs[i]
             return current_waypoint
         elif nearest_dist < self.max_reacquire:
