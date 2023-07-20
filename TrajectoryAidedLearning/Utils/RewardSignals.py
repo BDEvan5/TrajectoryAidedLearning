@@ -1,6 +1,6 @@
 from TrajectoryAidedLearning.Utils.RewardUtils import *
 
-from RacingRewards.Utils.utils import *
+from TrajectoryAidedLearning.Utils.utils import *
 from TrajectoryAidedLearning.Utils.StdTrack import StdTrack
 
 from TrajectoryAidedLearning.Planners.PurePursuit import PurePursuit

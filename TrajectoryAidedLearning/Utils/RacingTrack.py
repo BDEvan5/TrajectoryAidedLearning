@@ -1,4 +1,4 @@
-from RacingRewards.RewardSignals.RewardUtils import *
+from TrajectoryAidedLearning.RewardSignals.RewardUtils import *
 from matplotlib import pyplot as plt
 import numpy as np
 

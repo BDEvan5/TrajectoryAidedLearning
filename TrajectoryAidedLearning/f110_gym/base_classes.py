@@ -545,17 +545,19 @@ class Simulator(object):
         # check collisions between all agents
         self.check_collision()
 
-        for i, agent in enumerate(self.agents):
-            # update agent's information on other agents
-            opp_poses = np.concatenate((self.agent_poses[0:i, :], self.agent_poses[i+1:, :]), axis=0)
-            agent.update_opp_poses(opp_poses)
+        #! this is bad!!!!!!!!!!!!!!!!
+        # removed to prevent instant crashing due to bug.....
+        # for i, agent in enumerate(self.agents):
+        #     # update agent's information on other agents
+        #     opp_poses = np.concatenate((self.agent_poses[0:i, :], self.agent_poses[i+1:, :]), axis=0)
+        #     agent.update_opp_poses(opp_poses)
 
-            # update each agent's current scan based on other agents
-            agent.update_scan(agent_scans, i)
+        #     # update each agent's current scan based on other agents
+        #     agent.update_scan(agent_scans, i)
 
-            # update agent collision with environment
-            if agent.in_collision:
-                self.collisions[i] = 1.
+        #     # update agent collision with environment
+        #     if agent.in_collision:
+        #         self.collisions[i] = 1.
 
         # fill in observations
         # state is [x, y, steer_angle, vel, yaw_angle, yaw_rate, slip_angle]

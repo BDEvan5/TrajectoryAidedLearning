@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 from matplotlib.collections import LineCollection
-from RacingRewards.DataTools.MapData import MapData
-from RacingRewards.RewardSignals.StdTrack import StdTrack 
+from TrajectoryAidedLearning.DataTools.MapData import MapData
+from TrajectoryAidedLearning.RewardSignals.StdTrack import StdTrack 
 
 from TrajectoryAidedLearning.Utils.utils import *
 from TrajectoryAidedLearning.DataTools.TrainingGraphs.TrainingUtils import *

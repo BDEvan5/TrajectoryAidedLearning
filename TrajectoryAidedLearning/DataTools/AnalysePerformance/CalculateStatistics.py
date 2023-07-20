@@ -9,10 +9,10 @@ import trajectory_planning_helpers as tph
 from matplotlib.ticker import PercentFormatter
 from matplotlib.collections import LineCollection
 
-from RacingRewards.DataTools.MapData import MapData
-from RacingRewards.RewardSignals.StdTrack import StdTrack 
-from RacingRewards.RewardSignals.RacingTrack import RacingTrack
-from RacingRewards.Utils.utils import *
+from TrajectoryAidedLearning.DataTools.MapData import MapData
+from TrajectoryAidedLearning.RewardSignals.StdTrack import StdTrack 
+from TrajectoryAidedLearning.RewardSignals.RacingTrack import RacingTrack
+from TrajectoryAidedLearning.Utils.utils import *
 from matplotlib.ticker import MultipleLocator
 
 # SAVE_PDF = False

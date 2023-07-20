@@ -13,8 +13,8 @@ import time
 
 # settings
 SHOW_TRAIN = False
-# SHOW_TEST = True
 SHOW_TEST = False
+# SHOW_TEST = True
 VERBOSE = True
 LOGGING = True
 
