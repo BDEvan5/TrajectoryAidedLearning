@@ -1,7 +1,10 @@
 # TrajectoryAidedLearning
 
-This repo contains the source code for the paper entitled, "High-speed Autonomous Racing using Trajectory-aided Deep Reinforcement Learning"
+This repo contains the source code for the paper entitled, "[High-speed Autonomous Racing using Trajectory-aided Deep Reinforcement Learning](https://ieeexplore.ieee.org/document/10182327)"
 
+We present a reward signal that incorporates an optimal trajectory to train deep reinforcement learning agents for high-speed autonomous racing.
+
+![](Data/animation.gif)
 
 # Result Generation
 
@@ -13,51 +16,21 @@ For every test:
 - Run calculate_statistics
 - Run calculate_averages
 
-## Current formulations
-
-### Reward Signal Comparision
-
-- Train agents with the progress and cross-track and heading rewards 
-- Use the CthVsProgress config file
-- Results:
-    - Training graphs: CthVsProgress_TrainingGraph
-    - Lapt times and % progress bar plots: CthsVsProgress_Barplot
+## Tests:
 
 
 ### Maximum Speed Investigation
 
 - Aim: Understand how performance changes with different speeds.
-- Config files: CthSpeeds, CthSpeedMaps 
+- Config files: CthSpeeds, TAL_speeds 
 - Results: 
-    - Training graph: Cth_speeds_TrainingGraph
-    - Lap times and % success: Cth_speeds_Barplot
-        #TODO: this needs fixing and combining.
+    - Training graph: Cth_TAL_speeds_TrainingGraph
+    - Lap times and % success: Cth_TAL_speeds_Barplot
 
-### Speed Profile Analysis
+### 6 m/s Performance Comparision 
 
-- Aim: study the trajectories, speed and slip profiles of agents wtiha max speed of 5 and 7 m/s.
-- Config file: None, uses the Cth_speeds results
-- Results:
-    - Trajectories: GenerateVelocityProfiles, set the folder to Cth_speeds
-    - Speed and slip profile: Cth_speeds_Profiles 
-
-
-## Trajectory-aided Learning 
-
-All of these results presuppose that the baseline tests have been run for comparison.
-
-### Maximum Speed Investigation 
-
-- Aim: Study the performance for increasing maximum speeds
-- Config file: TAL_speeds
-- Results:
-    - Training graph: TAL_speeds_TrainingGraph
-    - % progress bar plot: TAL_speeds_AvgProgress
-
-### 6 m/s Comparison with Baseline 
-
-- Aim: Compare the baseline and TAL on different maps
-- Config file: TAL_maps
+- Aim: Compare the baseline and TAL on different maps with a maximum speed of 6 m/s.
+- Config file: Cth_maps, TAL_maps
 - Results:
     - Training graphs: TAL_Cth_maps_TrainingGraph
     - Lap times and success bar plot: TAL_Cth_maps_Barplot
@@ -65,7 +38,7 @@ All of these results presuppose that the baseline tests have been run for compar
 ### Speed Profile Analysis 
 
 - Aim: Study the speed profiles
-- Config file: requires the PP_speeds test
+- Requires the pure pursuit (PP_speeds) results
 - Results:
     - Trajectories: GenerateVelocityProfiles, set the folder to TAL_speeds
     - Speed profile pp TAL: TAL_speed_profiles
@@ -75,8 +48,22 @@ All of these results presuppose that the baseline tests have been run for compar
 ### Comparison with Literatures
 
 - Aim: Compare our method with the literature
-- Config file: Results from Bosello et al.
 - Results:
     - Bar plot: LiteratureComparison
+- Note that the results from the literature are hard coded.
 
 
+## Citation
+
+If you find this work useful, please consider citing:
+```
+@ARTICLE{10182327,
+  author={Evans, Benjamin David and Engelbrecht, Herman Arnold and Jordaan, Hendrik Willem},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={High-Speed Autonomous Racing Using Trajectory-Aided Deep Reinforcement Learning}, 
+  year={2023},
+  volume={8},
+  number={9},
+  pages={5353-5359},
+  doi={10.1109/LRA.2023.3295252}}
+```
