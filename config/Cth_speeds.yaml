@@ -7,7 +7,7 @@ n_scans: 2
 train_mode: "Std"
 test_mode: "Std"
 
-n: 5
+n: 4
 set_n: 1
 
 random_seed: 10000
@@ -20,9 +20,9 @@ map_name: "f1_esp"
 reward: "Cth"
 
 runs:
-  - max_speed: 4
-  - max_speed: 5
-  - max_speed: 6
+  # - max_speed: 4
+  # - max_speed: 5
+  # - max_speed: 6
   - max_speed: 7
   - max_speed: 8
 

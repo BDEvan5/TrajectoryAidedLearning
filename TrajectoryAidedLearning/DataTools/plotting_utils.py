@@ -12,9 +12,9 @@ def std_img_saving(name):
     plt.grid(True)
     plt.savefig(name + ".pdf", bbox_inches='tight', pad_inches=0)
     plt.savefig(name + ".svg", bbox_inches='tight', pad_inches=0)
-    new_name = "Data/UploadImgs2/" + name.split("/")[-1]
-    plt.savefig(new_name + ".pdf", bbox_inches='tight', pad_inches=0)
-    plt.savefig(new_name + ".svg", bbox_inches='tight', pad_inches=0)
+    # new_name = "Data/UploadImgs2/" + name.split("/")[-1]
+    # plt.savefig(new_name + ".pdf", bbox_inches='tight', pad_inches=0)
+    # plt.savefig(new_name + ".svg", bbox_inches='tight', pad_inches=0)
 
 
 

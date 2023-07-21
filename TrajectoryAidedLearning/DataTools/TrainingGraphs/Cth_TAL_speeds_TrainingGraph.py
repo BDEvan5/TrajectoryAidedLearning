@@ -16,7 +16,7 @@ def Cth_TAL_speeds_TrainingGraph_small():
     steps_list = []
     progresses_list = []
 
-    n_repeats = 5
+    n_repeats = 4
     for i, v in enumerate(range(4, 9)): 
         steps_list.append([])
         progresses_list.append([])
@@ -36,6 +36,7 @@ def Cth_TAL_speeds_TrainingGraph_small():
 
     xs = np.linspace(0, 100, 300)
     for i in range(len(steps_list)):
+        # min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         min, max, mean = convert_to_min_max_avg_iqm5(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
         plt.gca().fill_between(xs, min, max, color=pp[i], alpha=0.2)
@@ -45,12 +46,12 @@ def Cth_TAL_speeds_TrainingGraph_small():
     plt.ylabel("Track Progress %")
     plt.title("Baseline")
 
-    p = "Data/Vehicles/TAL_speedsRetry1/"
+    p = "Data/Vehicles/TAL_speeds/"
 
     steps_list = []
     progresses_list = []
 
-    n_repeats = 5
+    n_repeats = 4
     for i, v in enumerate(range(4, 9)): 
         steps_list.append([])
         progresses_list.append([])
@@ -65,6 +66,7 @@ def Cth_TAL_speeds_TrainingGraph_small():
     plt.sca(axs[1])
     xs = np.linspace(0, 100, 300)
     for i in range(len(steps_list)):
+        # min, max, mean = convert_to_min_max_avg(steps_list[i], progresses_list[i], xs)
         min, max, mean = convert_to_min_max_avg_iqm5(steps_list[i], progresses_list[i], xs)
         plt.plot(xs, mean, '-', color=pp[i], linewidth=2)
         # plt.plot(xs, mean, '-', color=pp[i], linewidth=2, label=labels[i])
