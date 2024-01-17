@@ -4,7 +4,16 @@ This repo contains the source code for the paper entitled, "[High-speed Autonomo
 
 We present a reward signal that incorporates an optimal trajectory to train deep reinforcement learning agents for high-speed autonomous racing.
 
-![](Data/animation.gif)
+![](Data/tal_calculation.png)
+
+Training agents with our reward signal results in significatly improved training performance.
+The most noteable performance difference is at high-speeds where previous rewards failed.
+
+![](Data/TAL_vs_baseline_reward.png)
+
+The improved training results in higher average progrresses at high speeds.
+
+![](Data/tal_progress.png)
 
 # Result Generation
 
@@ -17,7 +26,6 @@ For every test:
 - Run calculate_averages
 
 ## Tests:
-
 
 ### Maximum Speed Investigation
 
@@ -52,18 +60,21 @@ For every test:
     - Bar plot: LiteratureComparison
 - Note that the results from the literature are hard coded.
 
+![](Data/animation.gif)
+
 
 ## Citation
 
 If you find this work useful, please consider citing:
 ```
 @ARTICLE{10182327,
-  author={Evans, Benjamin David and Engelbrecht, Herman Arnold and Jordaan, Hendrik Willem},
-  journal={IEEE Robotics and Automation Letters}, 
-  title={High-Speed Autonomous Racing Using Trajectory-Aided Deep Reinforcement Learning}, 
-  year={2023},
-  volume={8},
-  number={9},
-  pages={5353-5359},
-  doi={10.1109/LRA.2023.3295252}}
+    author={Evans, Benjamin David and Engelbrecht, Herman Arnold and Jordaan, Hendrik Willem},
+    journal={IEEE Robotics and Automation Letters}, 
+    title={High-Speed Autonomous Racing Using Trajectory-Aided Deep Reinforcement Learning}, 
+    year={2023},
+    volume={8},
+    number={9},
+    pages={5353-5359},
+    doi={10.1109/LRA.2023.3295252}
+}
 ```
